@@ -60,7 +60,7 @@ reducerSettings = compose(eraseStore, combineReducers);
     ReactiveFormsModule,
     StoreModule.provideStore(reducerSettings({globalStorage: globalStorageReducer})),
     HttpModule,
-    RouterModule.forRoot(ROUTES, {useHash: false})
+    RouterModule.forRoot(ROUTES, {useHash: true})
   ],
   providers: [
     ApiService,
