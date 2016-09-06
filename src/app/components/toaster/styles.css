@@ -1,0 +1,62 @@
+@import '../../../assets/css/variables.css';
+
+.container {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  width: calc(100% - 6rem);
+  max-width: 400px;
+
+  transform: translateX(150%);
+  transition: transform .5s;
+  font-size: 1.4rem;
+
+  z-index: 100;
+}
+
+.container.active {
+  transform: translateX(0%);
+}
+
+.toast {
+  background: var(--white);
+  padding: 1rem 1.5rem;
+  border-left-style: solid;
+  border-left-width: .5rem;
+  border-radius: 4px;
+  box-shadow: var(--shadow2);
+}
+
+.default {
+  border-left-color: var(--first-level);
+}
+
+.success {
+  border-left-color: var(--green);
+}
+.warning {
+  border-left-color: var(--orange);
+}
+.error, .danger {
+  border-left-color: var(--red)
+}
+
+.close{
+  outline: 0;
+  cursor: pointer;
+  display: inline-block;
+  background: 0;
+  transition: .3s ease;
+  font-size: 0;
+  position: absolute;
+  top: .3rem;
+  right: .3rem;
+  overflow: hidden;
+  border: none;
+}
+
+.close:before{
+  content: '\00d7';
+  color: var(--red);
+  font-size: 2rem;
+}

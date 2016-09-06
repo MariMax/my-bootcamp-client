@@ -1,0 +1,66 @@
+<div class="module">
+  <div class="container" [class.active]="currentForm === actions.REGISTER_FORM">
+    <div class="card"></div>
+    <div class="card">
+      <h1 class="title">Login</h1>
+      <form novalidate [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value, loginForm)" >
+        <div class="input-container">
+          <input type="text" id="user-name" [formControl]="loginForm.controls.login" latin-letters-only>
+          <label for="user-name">Login</label>
+          <div class="bar"></div>
+          <div class="error" *ngIf="showError(loginForm.controls.login, 'required')">Field is required</div>
+        </div>
+        <div class="input-container">
+          <input type="password" id="password" [formControl]="loginForm.controls.password" letters-and-numbers>
+          <label for="password">Password</label>
+          <div class="bar"></div>
+          <div class="error" *ngIf="showError(loginForm.controls.password, 'required')">Field is required</div>
+        </div>
+        <div class="button-container">
+          <button type="submit" [disabled]="loginForm.invalid"><span>Sign in</span></button>
+        </div>
+      </form>
+    </div>
+    <div class="card alt">
+      <div class="top-spacer"></div>
+        <a class="toggle" href="" (keypress.Enter)="toggleRegister($event)" (click)="toggleRegister($event)">
+          <!--<span>+</span>-->
+          <svg width="20" height="20">
+            <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-plus')}}"/>
+          </svg>
+          Open registeration form
+        </a>
+      <h1 class="title">
+        <a class="close" href="" (keypress.Enter)="toggleRegister($event)" (click)="toggleRegister($event)">
+          Close registration form
+        </a>
+        Register
+      </h1>
+      <form novalidate [formGroup]="registerForm" (ngSubmit)="register(registerForm.value, registerForm)" >
+        <div class="input-container">
+          <input type="text" id="register-user-name"  [formControl]="registerForm.controls.login" latin-letters-only>
+          <label for="register-user-name">Login</label>
+          <div class="bar"></div>
+          <div class="error" *ngIf="showError(registerForm.controls.login, 'required')">Field is required</div>
+        </div>
+        <div class="input-container">
+          <input type="password" id="register-password"  [formControl]="registerForm.controls.passwords.controls.password" letters-and-numbers>
+          <label for="register-password">Password</label>
+          <div class="bar"></div>
+          <div class="error" *ngIf="showError(registerForm.controls.passwords.controls.password, 'required')">Field is required</div>
+        </div>
+        <div class="input-container">
+          <input type="password" id="password-confirmation" [formControl]="registerForm.controls.passwords.controls.confirmation" letters-and-numbers>
+          <label for="password-confirmation">Repeat Password</label>
+          <div class="bar"></div>
+          <div class="error" *ngIf="showError(registerForm.controls.passwords.controls.confirmation, 'required')">Field is required</div>
+          <div class="error" *ngIf="!showError(registerForm.controls.passwords.controls.confirmation, 'required') && showError(registerForm.controls.passwords, 'equal')">Not equal to the password</div>
+        </div>
+        <div class="button-container">
+          <button type="submit" [disabled]="registerForm.invalid"><span>Sign up</span></button>
+        </div>
+      </form>
+      <div class="bottom-spacer"></div>
+    </div>
+  </div>
+</div>

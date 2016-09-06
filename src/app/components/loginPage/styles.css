@@ -1,0 +1,492 @@
+@import '../../../assets/css/variables.css';
+
+.module {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  position: absolute;
+  bottom: -1.7rem;
+  font-size: 1.2rem;
+  color: var(--red);
+  font-weight: 400;
+}
+
+.container {
+  position: relative;
+  max-width: 46rem;
+}
+
+.container.active .card:first-child {
+  background: var(--first-level);
+  margin: 0 1.5rem;
+}
+
+.container.active .card:nth-child(2) {
+  background: var(--first-level);
+  margin: 0 1rem;
+}
+
+.container.active .card:nth-child(2) input,
+.container.active .card:nth-child(2) button,
+.container.active .card:nth-child(2) form,
+.container.active .card:nth-child(2) a {
+  visibility: hidden;
+}
+
+.container.active .card.alt {
+  top: 2rem;
+  right: 0;
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+  border-radius: .5rem;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container.active .card.alt .toggle {
+  position: absolute;
+  top: 4rem;
+  right: -7rem;
+  box-shadow: none;
+  height: 150rem;
+  transform: scale(15);
+  transition: transform .3s ease;
+  z-index: -1;
+  background-color: var(--primary);
+}
+
+.container.active .card.alt .toggle:before {
+  content: '';
+}
+
+.container.active .card.alt .title,
+.container.active .card.alt .input-container,
+.container.active .card.alt .button-container {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: .3s ease;
+}
+
+.container.active .card.alt .title {
+  transition-delay: .3s;
+}
+
+.container.active .card.alt .input-container {
+  transition-delay: .4s;
+}
+
+.container.active .card.alt .input-container:nth-child(2) {
+  transition-delay: .5s;
+}
+
+.container.active .card.alt .input-container:nth-child(3) {
+  transition-delay: .6s;
+}
+
+.container.active .card.alt .button-container {
+  transition-delay: .7s;
+}
+
+.container.active .card.alt form,
+.container.active .card.alt .bottom-spacer {
+  position: static;
+}
+
+.card.alt form,
+.card.alt .bottom-spacer {
+  position: absolute;
+  left: 7rem;
+}
+
+/* Card */
+.card {
+  position: relative;
+  background: var(--white);
+  border-radius: 5px;
+  padding: 60px 0 40px 0;
+  box-sizing: border-box;
+  box-shadow: var(--shadow1);
+  transition: .3s ease;
+}
+
+.card form {
+  padding-top: 3.5rem;
+}
+
+.card:first-child {
+  background: var(--first-level);
+  height: 1rem;
+  border-radius: .5rem .5rem 0 0;
+  margin: 0 1rem;
+  padding: 0;
+}
+
+/* Title */
+.card .title {
+  position: relative;
+  z-index: 1;
+  border-left: .5rem solid var(--enabled-on-white);
+  margin: 0;
+  padding: 10px 0 1rem 2rem;
+  color: var(--enabled-on-white);
+  font-size: 3.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Inputs */
+.card .input-container {
+  position: relative;
+  margin: 0 2rem 5rem;
+}
+
+.card .input-container input:-webkit-autofill {
+  background-color: transparent;
+}
+
+.card .input-container input {
+  outline: none;
+  z-index: 1;
+  position: relative;
+  background: none;
+  width: 100%;
+  height: 6rem;
+  border: 0;
+  color: var(--dark-gray);
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.card .input-container input:focus ~ label,
+.card .input-container input.ng-valid ~ label {
+  color: var(--light-gray);
+  transform: translate(-12%, -50%) scale(0.75);
+}
+
+.card .input-container input:focus ~ .bar:before,
+.card .input-container input:focus ~ .bar:after {
+  width: 50%;
+}
+
+.card .input-container label {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  color: var(--gray);
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 6rem;
+  transition: all 0.2s ease;
+}
+
+.card .input-container .bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--gray);
+  width: 100%;
+  height: 1px;
+}
+
+.card .input-container .bar:before,
+.card .input-container .bar:after {
+  content: '';
+  position: absolute;
+  background: var(--primary);
+  width: 0;
+  height: 2px;
+  transition: .2s ease;
+}
+
+.card .input-container input.ng-touched.ng-invalid ~ .bar:before,
+.card .input-container input.ng-touched.ng-invalid ~ .bar:after {
+  background: var(--red);
+  width: 50%;
+  height: 2px;
+}
+
+.card .input-container input:focus ~ .error {
+  display: none;
+}
+
+.card .input-container .bar:before {
+  left: 50%;
+}
+
+.card .input-container .bar:after {
+  right: 50%;
+}
+
+/* Button */
+.card .button-container {
+  margin: 0 6rem;
+  text-align: center;
+}
+
+.card .button-container button {
+  outline: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  background: 0;
+  width: 24rem;
+  border: 2px solid var(--enabled-on-white);
+  padding: 2rem 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .3s ease;
+}
+
+.card .button-container button:disabled {
+  cursor: not-allowed;
+  border: 2px solid var(--disabled-on-white) !important;
+}
+
+.card .button-container button:disabled span {
+  color: var(--disabled-on-white) !important;
+}
+
+.card .button-container button span {
+  position: relative;
+  z-index: 1;
+  color: var(--enabled-on-white);
+  transition: .3s ease;
+}
+
+.card .button-container button:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background: var(--primary);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  margin: -1.5rem 0 0 -1.5rem;
+  opacity: 0;
+  transition: .2s ease;
+}
+
+.card .button-container button:hover,
+.card .button-container button:active,
+.card .button-container button:focus {
+  border-color: var(--primary);
+}
+
+.card .button-container button:hover span,
+.card .button-container button:active span,
+.card .button-container button:focus span {
+  color: var(--primary);
+}
+
+.card .button-container button:active span {
+  color: var(--white)
+}
+
+.card .button-container button:active:before {
+  opacity: 1;
+  transform: scale(10);
+}
+.card .button-container button:disabled:before {
+  opacity: 0 !important;
+}
+
+/* Button */
+.card.alt .button-container button {
+  width: 100%;
+  background: var(--primary);
+}
+
+.card.alt .button-container button {
+  border-color: var(--enabled-on-primary);
+}
+
+.card.alt .button-container button span {
+  color: var(--enabled-on-primary);
+}
+
+.card.alt .button-container button:disabled {
+  border-color: var(--disabled-on-primary) !important;
+}
+
+.card.alt .button-container button:disabled span {
+  color: var(--disabled-on-primary) !important;
+}
+
+.card.alt .button-container button:hover,
+.card.alt .button-container button:focus {
+  border-color: var(--hover-on-primary);
+}
+
+.card.alt .button-container button:hover span,
+.card.alt .button-container button:focus span {
+  color: var(--hover-on-primary);
+}
+
+.card.alt .button-container button:before {
+  background: var(--white);
+}
+
+.card.alt .button-container button:active span {
+  color: var(--primary);
+}
+
+.card.alt .button-container button:active {
+  border-color: var(--white);
+}
+
+/* Footer */
+.card .footer {
+  margin: 4rem 0 0;
+  color: var(--lighter-gray);
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.card .footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: .3s ease;
+}
+
+.card .footer a:hover {
+  color: var(--gray);
+}
+
+/* Alt Card */
+.card.alt {
+  position: absolute;
+  top: -4rem;
+  right: -7rem;
+  z-index: 10;
+  width: 14rem;
+  height: 14rem;
+  background: none;
+  border-radius: 100%;
+  box-shadow: none;
+  padding: 0;
+  transition: .3s ease;
+}
+
+.card.alt .bottom-spacer {
+  height: 4rem;
+}
+
+.card.alt .top-spacer {
+  height: 6rem;
+}
+
+/* Toggle */
+.card.alt .toggle {
+  position: relative;
+  background: var(--enabled-on-white);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  box-shadow: var(--shadow1);
+  color: var(--white);
+  font-size: 0;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: background .3s ease;
+}
+
+.card.alt .toggle svg{
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  top: 2.9rem;
+  left: 3.2rem;
+  fill: var(--white)
+}
+
+.card.alt .toggle:hover, .card.alt .toggle:focus, .card.alt .toggle:active {
+  background: var(--primary);
+}
+
+/*.card.alt .toggle:before {*/
+  /*content: '\00d7';*/
+  /*display: inline-block;*/
+  /*position: absolute;*/
+  /*top: 1.7rem;*/
+  /*left: 4.1rem;*/
+  /*font-size: 5rem;*/
+  /*text-rendering: auto;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+  /*transform: rotate(45deg);*/
+/*}*/
+
+.card.alt .title,
+.card.alt .input-container,
+.card.alt .button-container {
+  left: 10rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Title */
+.card.alt .title {
+  position: relative;
+  border-color: var(--enabled-on-primary);
+  color: var(--enabled-on-primary);
+}
+
+.card.alt .title .close {
+  cursor: pointer;
+  position: absolute;
+  top: -1rem;
+  right: 2rem;
+  display: inline-block;
+  color: var(--white);
+  font-size: 0;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.card.alt .title .close:before {
+  content: '\00d7';
+  font-size: 5rem;
+  color: var(--enabled-on-primary);
+}
+
+.card.alt .title .close:hover:before, .card.alt .title .close:focus:before, .card.alt .title .close:active:before {
+  color: var(--hover-on-primary);
+}
+
+/* Input */
+.card.alt .input-container input {
+  color: var(--white);
+}
+
+.card.alt .input-container input:focus ~ label,
+.card.alt .input-container input:valid ~ label {
+  color: var(--white);
+}
+
+.card.alt .input-container input:focus ~ .bar:before,
+.card.alt .input-container input:focus ~ .bar:after {
+  background: var(--white);
+}
+
+.card.alt .input-container label {
+  color: var(--white);
+  opacity: .8;
+}
+
+.card.alt .input-container .bar {
+  background: var(--white);
+  opacity: .8;
+}

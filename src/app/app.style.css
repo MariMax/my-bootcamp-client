@@ -1,0 +1,34 @@
+@import '../assets/css/variables.css';
+
+html, body{
+  padding: 0;
+  margin: 0;
+  background: var(--lightest-gray);
+  color: var(--gray);
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 10px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+app{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+}
+
+app > nav {
+
+}
+
+app > main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+app > footer {
+
+}

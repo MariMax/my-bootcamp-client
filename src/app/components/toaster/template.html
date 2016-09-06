@@ -1,0 +1,6 @@
+<div class="container" role="alert" aria-hidden="true" [class.active]="active">
+  <div class="toast" [ngClass]="type">
+    <p>{{message}}</p>
+    <button class="close" (click)="close()">close</button>
+  </div>
+</div>
