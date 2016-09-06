@@ -27,6 +27,8 @@ import {LatinLettersOnlyDirective, LettersAndNumbersDirective} from './directive
 import {combineReducers} from "@ngrx/store";
 import {compose} from "@ngrx/core/compose";
 
+import {useHash} from './useHashConfig';
+
 let reducerSettings;
 const eraseStore = (reducer: Function) => (state, action) => {
   if (action.type === 'ERASE_STORE') {
@@ -60,7 +62,7 @@ reducerSettings = compose(eraseStore, combineReducers);
     ReactiveFormsModule,
     StoreModule.provideStore(reducerSettings({globalStorage: globalStorageReducer})),
     HttpModule,
-    RouterModule.forRoot(ROUTES, {useHash: true})
+    RouterModule.forRoot(ROUTES, {useHash: useHash})
   ],
   providers: [
     ApiService,

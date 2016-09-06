@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {useHash} from '../../useHashConfig';
 
 @Injectable()
 export class SvgUrlResolverService {
@@ -6,6 +7,6 @@ export class SvgUrlResolverService {
   }
 
   getUrl(id){
-    return `${window.location.href}#${id}`;
+    return useHash?`#${id}`:`${window.location.href}#${id}`;
   }
 }
