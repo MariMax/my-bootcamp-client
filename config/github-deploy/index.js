@@ -1,8 +1,8 @@
 const helpers = require('../helpers');
 const execSync = require('child_process').execSync;
 
-const REPO_NAME_RE = /Push {2}URL: https:\/\/github\.com\/.*\/(.*)\.git/;
-// const REPO_NAME_RE = /Push {2}URL: git@github\.com:.*\/(.*)\.git/;
+// const REPO_NAME_RE = /Push {2}URL: https:\/\/github\.com\/.*\/(.*)\.git/;
+const REPO_NAME_RE = /Push {2}URL: git@github\.com:.*\/(.*)\.git/;
 
 function getWebpackConfigModule() {
   // if (helpers.hasProcessFlag('github-dev')) {
