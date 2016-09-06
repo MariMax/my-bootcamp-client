@@ -3,9 +3,6 @@ const execSync = require('child_process').execSync;
 
 const REPO_NAME_RE = /Push {2}URL: git@github\.com:.*\/(.*)\.git/;
 
-// https://github.com/MariMax/angular2-webpack-starter.git
-// git@github.com:MariMax/angular2-webpack-starter.git
-
 function getWebpackConfigModule() {
   // if (helpers.hasProcessFlag('github-dev')) {
   //   return require('../webpack.dev.js');
