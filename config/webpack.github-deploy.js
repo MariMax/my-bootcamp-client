@@ -4,7 +4,7 @@
 const helpers = require('./helpers');
 const ghDeploy = require('./github-deploy');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
-const ghpages = require('gh-pages');
+// const ghpages = require('gh-pages');
 const webpackConfig = ghDeploy.getWebpackConfigModule(); // the settings that are common to prod and dev
 
 
@@ -65,14 +65,14 @@ module.exports = webpackMerge(webpackConfig, {
           message: COMMIT_MESSAGE
         };
 
-        ghpages.publish(webpackConfig.output.path, options, function(err) {
-          if (err) {
-            console.log('GitHub deployment done. STATUS: ERROR.');
-            throw err;
-          } else {
-            console.log('GitHub deployment done. STATUS: SUCCESS.');
-          }
-        });
+        // ghpages.publish(webpackConfig.output.path, options, function(err) {
+        //   if (err) {
+        //     console.log('GitHub deployment done. STATUS: ERROR.');
+        //     throw err;
+        //   } else {
+        //     console.log('GitHub deployment done. STATUS: SUCCESS.');
+        //   }
+        // });
       });
     }
   ]
