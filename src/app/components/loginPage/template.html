@@ -1,4 +1,5 @@
 <div class="module">
+  <div class="cover" *ngIf="submitPending"></div>
   <div class="container" [class.active]="currentForm === actions.REGISTER_FORM">
     <div class="card"></div>
     <div class="card">

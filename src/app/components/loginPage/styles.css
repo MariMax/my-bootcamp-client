@@ -5,6 +5,16 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
+}
+
+.cover{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
 }
 
 .error {
@@ -38,7 +48,7 @@
 }
 
 .container.active .card.alt {
-  top: 2rem;
+  top: -4rem;
   right: 0;
   width: 100%;
   min-width: 100%;
@@ -235,6 +245,8 @@
   position: relative;
   display: inline-block;
   background: 0;
+  background-color: var(--enabled-on-white);
+  border-radius: 3px;
   width: 24rem;
   border: 2px solid var(--enabled-on-white);
   padding: 2rem 0;
@@ -244,105 +256,48 @@
   text-transform: uppercase;
   overflow: hidden;
   transition: .3s ease;
+  box-shadow: var(--shadow1);
 }
 
 .card .button-container button:disabled {
   cursor: not-allowed;
-  border: 2px solid var(--disabled-on-white) !important;
+  border: 2px solid var(--disabled-on-primary) !important;
+  background-color: var(--disabled-on-primary) !important;
+  box-shadow: none;
 }
 
-.card .button-container button:disabled span {
-  color: var(--disabled-on-white) !important;
+.card .button-container button:disabled span{
+  color: var(--disabled-on-primary-text) !important;
 }
 
 .card .button-container button span {
   position: relative;
   z-index: 1;
-  color: var(--enabled-on-white);
+  color: var(--white);
   transition: .3s ease;
-}
-
-.card .button-container button:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  background: var(--primary);
-  width: 3rem;
-  height: 3rem;
-  border-radius: 100%;
-  margin: -1.5rem 0 0 -1.5rem;
-  opacity: 0;
-  transition: .2s ease;
 }
 
 .card .button-container button:hover,
 .card .button-container button:active,
 .card .button-container button:focus {
   border-color: var(--primary);
+  background-color: var(--primary);
 }
 
-.card .button-container button:hover span,
-.card .button-container button:active span,
-.card .button-container button:focus span {
-  color: var(--primary);
-}
-
-.card .button-container button:active span {
-  color: var(--white)
-}
-
-.card .button-container button:active:before {
-  opacity: 1;
-  transform: scale(10);
-}
-.card .button-container button:disabled:before {
-  opacity: 0 !important;
-}
-
-/* Button */
-.card.alt .button-container button {
-  width: 100%;
-  background: var(--primary);
+.card .button-container button:active{
+  box-shadow: var(--shadow4);
 }
 
 .card.alt .button-container button {
+  background-color: var(--enabled-on-primary);
   border-color: var(--enabled-on-primary);
 }
 
-.card.alt .button-container button span {
-  color: var(--enabled-on-primary);
-}
-
-.card.alt .button-container button:disabled {
-  border-color: var(--disabled-on-primary) !important;
-}
-
-.card.alt .button-container button:disabled span {
-  color: var(--disabled-on-primary) !important;
-}
-
 .card.alt .button-container button:hover,
+.card.alt .button-container button:active,
 .card.alt .button-container button:focus {
+  background: var(--hover-on-primary);
   border-color: var(--hover-on-primary);
-}
-
-.card.alt .button-container button:hover span,
-.card.alt .button-container button:focus span {
-  color: var(--hover-on-primary);
-}
-
-.card.alt .button-container button:before {
-  background: var(--white);
-}
-
-.card.alt .button-container button:active span {
-  color: var(--primary);
-}
-
-.card.alt .button-container button:active {
-  border-color: var(--white);
 }
 
 /* Footer */
@@ -391,8 +346,8 @@
 .card.alt .toggle {
   position: relative;
   background: var(--enabled-on-white);
-  width: 10rem;
-  height: 10rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 100%;
   box-shadow: var(--shadow1);
   color: var(--white);
@@ -407,8 +362,8 @@
   width: 4rem;
   height: 4rem;
   position: absolute;
-  top: 2.9rem;
-  left: 3.2rem;
+  top: 1rem;
+  left: 1.1rem;
   fill: var(--white)
 }
 

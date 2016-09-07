@@ -25,6 +25,7 @@ export class LoginComponent extends ComponentBase {
   actions: any;
   currentForm: any;
   store: any;
+  submitPending:boolean = false;
 
 
   constructor(private authService: AuthService,
@@ -73,24 +74,32 @@ export class LoginComponent extends ComponentBase {
   }
 
   logIn(creds) {
+    this.submitPending = true;
     const subscription = this.authService.signIn(creds)
       .subscribe(() => {
         subscription.unsubscribe();
+        this.submitPending = false;
         this.router.navigate(['/courses']);
       }, ()=>{
         this.loginForm.controls['password']['updateValue']('');
+        this.submitPending = false;
         subscription.unsubscribe()
       });
     return false;
   }
 
   register(creds) {
+    this.submitPending = true;
     const subscription = this.authService.register({login:creds.login, password:creds.passwords.password, confirmation: creds.passwords.confirmation})
       .subscribe(() => {
         subscription.unsubscribe();
+        this.submitPending = false;
         this.router.navigate(['/courses']);
         this.toggleRegister()
-      }, ()=>subscription.unsubscribe());
+      }, ()=>{
+        subscription.unsubscribe();
+        this.submitPending = false;
+      });
     return false;
   }
 

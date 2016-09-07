@@ -12,7 +12,8 @@
   --red: #FF1744;
   --primary: #3F51B5;/*indigo 500 https://material.google.com/style/color.html#color-color-palette*/
   --disabled-on-white: #C5CAE9;/*indigo 100*/
-  --disabled-on-primary: #E0E0E0;/*grey 300*/
+  --disabled-on-primary: #eaeaea;
+  --disabled-on-primary-text: #a8a8a8;
   --enabled-on-white: #7986CB;/*indigo 300*/
   --enabled-on-primary: #FFA726;/*pink 300*/
   --hover-on-primary: #F57C00;/*pink 300*/
