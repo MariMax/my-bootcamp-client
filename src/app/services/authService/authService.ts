@@ -65,6 +65,26 @@ export class AuthService {
       .map(res => res.data);
   }
 
+  fbLogin(){
+    return Observable.fromPromise(new Promise((resolve, reject)=>{
+      let accessToken, userLogin;
+      FB.login((response:any)=>{
+        if (response.status === 'connected'){
+          accessToken = response.authResponse.accessToken;
+          return FB.api('/me','GET',(response:any)=>resolve({login: response.name, token:accessToken, userId: response.id}))
+        }
+        return reject();
+      })
+    }))
+      .flatMap(res => {
+        console.log(res);
+        return this.api.post(`/fbLogin`, res)
+      })
+      .do(res => this.setJwt(res.token))
+      .do(res => this.storeService.saveGlobalItem(res.data, '_id'))
+      .map(res => res.data);
+  }
+
   // validateToken() {
   //   const subscription = this.api.post('/validate', {})
   //     .subscribe(()=>subscription.unsubscribe(), ()=> {

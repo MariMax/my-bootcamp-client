@@ -19,6 +19,11 @@
         </div>
         <div class="button-container">
           <button type="submit" [disabled]="loginForm.invalid"><span>Sign in</span></button>
+          <a href="" (keypress.Enter)="fbLogin($event)" (click)="fbLogin($event)">
+            <svg width="20" height="20">
+              <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-fb')}}"/>
+            </svg>
+          </a>
         </div>
       </form>
     </div>

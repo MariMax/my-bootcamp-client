@@ -1,7 +1,10 @@
 /*
  * Angular 2 decorators and services
  */
+
 import { Component, ViewEncapsulation } from '@angular/core';
+import {FBConnector} from './services';
+import {fbAppID} from './appConfig';
 
 // import { AppState } from './app.service';
 
@@ -9,6 +12,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
  * App Component
  * Top Level Component
  */
+
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
@@ -62,14 +66,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class App {
   name = 'Angular 2 Webpack Starter';
 
-  constructor(
-  //  public appState: AppState
-  ) {
-
-  }
+  constructor() {}
 
   ngOnInit() {
-    // console.log('Initial App State', this.appState.state);
+    const fbCon: FBConnector = new FBConnector(fbAppID);
+    fbCon.initFB();
   }
 
 }

@@ -25,7 +25,7 @@ export class LoginComponent extends ComponentBase {
   actions: any;
   currentForm: any;
   store: any;
-  submitPending:boolean = false;
+  submitPending: boolean = false;
 
 
   constructor(private authService: AuthService,
@@ -59,7 +59,7 @@ export class LoginComponent extends ComponentBase {
   }
 
   toggleRegister($event?) {
-    $event&&$event.preventDefault();
+    $event && $event.preventDefault();
     if (this.currentForm === this.actions.LOGIN_FORM) {
       return this.storeService.dispatch({type: this.actions.REGISTER_FORM})
     }
@@ -80,7 +80,7 @@ export class LoginComponent extends ComponentBase {
         subscription.unsubscribe();
         this.submitPending = false;
         this.router.navigate(['/courses']);
-      }, ()=>{
+      }, ()=> {
         this.loginForm.controls['password']['updateValue']('');
         this.submitPending = false;
         subscription.unsubscribe()
@@ -88,15 +88,35 @@ export class LoginComponent extends ComponentBase {
     return false;
   }
 
+  fbLogin($event?) {
+    $event && $event.preventDefault();
+    const subscription = this.authService.fbLogin()
+      .subscribe((res) => {
+        console.log(res);
+        subscription.unsubscribe();
+        this.submitPending = false;
+        this.router.navigate(['/courses']);
+      }, ()=> {
+        this.submitPending = false;
+        subscription.unsubscribe()
+      });
+
+
+  }
+
   register(creds) {
     this.submitPending = true;
-    const subscription = this.authService.register({login:creds.login, password:creds.passwords.password, confirmation: creds.passwords.confirmation})
+    const subscription = this.authService.register({
+      login: creds.login,
+      password: creds.passwords.password,
+      confirmation: creds.passwords.confirmation
+    })
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
         this.router.navigate(['/courses']);
         this.toggleRegister()
-      }, ()=>{
+      }, ()=> {
         subscription.unsubscribe();
         this.submitPending = false;
       });

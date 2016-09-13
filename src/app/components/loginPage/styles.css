@@ -235,8 +235,10 @@
 
 /* Button */
 .card .button-container {
-  margin: 0 6rem;
+  margin: 0 3rem;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card .button-container button {
@@ -257,6 +259,21 @@
   overflow: hidden;
   transition: .3s ease;
   box-shadow: var(--shadow1);
+}
+
+.card .button-container a{
+  display: block;
+  margin-left: 1rem;
+  color:var(--enabled-on-white)
+}
+
+.card .button-container a:hover,.card .button-container a:focus, .card .button-container a:active{
+  color:var(--primary);
+}
+
+.card .button-container a>svg{
+  width: 4rem;
+  height: 100%;
 }
 
 .card .button-container button:disabled {
@@ -291,6 +308,10 @@
 .card.alt .button-container button {
   background-color: var(--enabled-on-primary);
   border-color: var(--enabled-on-primary);
+}
+
+.card.alt .button-container button{
+  width: 31rem;
 }
 
 .card.alt .button-container button:hover,

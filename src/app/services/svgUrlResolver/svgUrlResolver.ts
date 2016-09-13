@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {useHash} from '../../useHashConfig';
+import {useHash} from '../../appConfig';
 
 @Injectable()
 export class SvgUrlResolverService {

@@ -27,7 +27,7 @@ import {LatinLettersOnlyDirective, LettersAndNumbersDirective} from './directive
 import {combineReducers} from "@ngrx/store";
 import {compose} from "@ngrx/core/compose";
 
-import {useHash} from './useHashConfig';
+import {useHash} from './appConfig';
 
 let reducerSettings;
 const eraseStore = (reducer: Function) => (state, action) => {
