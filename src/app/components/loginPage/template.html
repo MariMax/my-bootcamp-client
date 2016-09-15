@@ -18,7 +18,7 @@
           <div class="error" *ngIf="showError(loginForm.controls.password, 'required')">Field is required</div>
         </div>
         <div class="button-container">
-          <button type="submit" [disabled]="loginForm.invalid"><span>Sign in</span></button>
+          <button type="submit" [class.processing]="submitPending" [disabled]="loginForm.invalid"><span>Sign in</span></button>
           <a href="" (keypress.Enter)="fbLogin($event)" (click)="fbLogin($event)">
             <svg width="20" height="20">
               <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-fb')}}"/>
@@ -63,7 +63,7 @@
           <div class="error" *ngIf="!showError(registerForm.controls.passwords.controls.confirmation, 'required') && showError(registerForm.controls.passwords, 'equal')">Not equal to the password</div>
         </div>
         <div class="button-container">
-          <button type="submit" [disabled]="registerForm.invalid"><span>Sign up</span></button>
+          <button type="submit" [class.processing]="submitPending" [disabled]="registerForm.invalid"><span>Sign up</span></button>
         </div>
       </form>
       <div class="bottom-spacer"></div>

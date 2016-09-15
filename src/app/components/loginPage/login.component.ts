@@ -89,14 +89,14 @@ export class LoginComponent extends ComponentBase {
   }
 
   fbLogin($event?) {
+    this.submitPending = true;
     $event && $event.preventDefault();
     const subscription = this.authService.fbLogin()
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
         this.router.navigate(['/courses']);
-      }, ()=> {
+      },()=> {
         this.submitPending = false;
         subscription.unsubscribe()
       });

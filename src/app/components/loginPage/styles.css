@@ -314,6 +314,36 @@
   width: 31rem;
 }
 
+.card .button-container button:after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-left: -1.5rem;
+  margin-top: -1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border: 2px dotted #fff;
+  border-radius: 50%;
+  transition: opacity 0.1s 0.4s;
+  opacity: 0;
+  font-size: 2.4rem;
+}
+
+.card .button-container button.processing {
+  font-size: 0;
+}
+.card .button-container button.processing:after {
+   opacity: 1;
+   animation: rotate 6s 0.4s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .card.alt .button-container button:hover,
 .card.alt .button-container button:active,
 .card.alt .button-container button:focus {
