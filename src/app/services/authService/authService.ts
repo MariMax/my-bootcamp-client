@@ -11,6 +11,7 @@ import {authReducer} from './reducers';
 @Injectable()
 export class AuthService {
   JWT_KEY: string = 'auth_token';
+  USER_LOGIN_KEY = 'user_login';
   store;
   signedOut:boolean = true;
 
@@ -32,14 +33,20 @@ export class AuthService {
       });
 
     const token = window.localStorage.getItem(this.JWT_KEY);
+    const userData = JSON.parse(window.localStorage.getItem(this.USER_LOGIN_KEY));
     if (token) {
-      this.setJwt(token);
+      this.setJwt(token, userData);
     }
   }
 
-  setJwt(jwt: string) {
+  setJwt(jwt: string, userData:any) {
     window.localStorage.setItem(this.JWT_KEY, jwt);
+    window.localStorage.setItem(this.USER_LOGIN_KEY, JSON.stringify(userData));
+
     this.storeService.dispatch({type:actions.SET_TOKEN, payload:jwt});
+    this.storeService.dispatch({type:actions.SET_USER, payload: userData.id});
+    this.storeService.saveGlobalItem(userData, 'id');
+
     this.api.setHeaders({Authorization: `Bearer ${jwt}`});
     this.signedOut = false;
   }
@@ -50,38 +57,29 @@ export class AuthService {
 
   signIn(creds): Observable<any> {
     return this.api.post(`/signin`, creds)
-      .do(res => this.setJwt(res.token))
-      .do(res => {
-        this.storeService.dispatch({type:actions.SET_USER, payload: res.data._id});
-        this.storeService.saveGlobalItem(res.data, '_id');
-      })
+      .do(res => this.setJwt(res.token, res.data))
       .map(res => res.data);
   }
 
   register(creds): Observable<any> {
     return this.api.post(`/signup`, creds)
-      .do(res => this.setJwt(res.token))
-      .do(res => this.storeService.saveGlobalItem(res.data, '_id'))
+      .do(res => this.setJwt(res.token, res.data))
       .map(res => res.data);
   }
 
   fbLogin(){
-    return Observable.fromPromise(new Promise((resolve, reject)=>{
-      let accessToken, userLogin;
+    return Observable.create(observer=>{
+      let accessToken;
       FB.login((response:any)=>{
         if (response.status === 'connected'){
           accessToken = response.authResponse.accessToken;
-          return FB.api('/me','GET',(response:any)=>resolve({login: response.name, token:accessToken, userId: response.id}))
+          return FB.api('/me','GET',(response:any)=>observer.next({login: response.name, token:accessToken, userId: response.id}))
         }
-        return reject();
+        return observer.error();
       })
-    }))
-      .flatMap(res => {
-        console.log(res);
-        return this.api.post(`/fbLogin`, res)
-      })
-      .do(res => this.setJwt(res.token))
-      .do(res => this.storeService.saveGlobalItem(res.data, '_id'))
+    })
+      .flatMap(res => this.api.post(`/fbLogin`, res))
+      .do(res => this.setJwt(res.token, res.data))
       .map(res => res.data);
   }
 
@@ -95,6 +93,7 @@ export class AuthService {
 
   signout() {
     window.localStorage.removeItem(this.JWT_KEY);
+    window.localStorage.removeItem(this.USER_LOGIN_KEY);
     this.storeService.dispatch({type:actions.DROP_USER});
     this.storeService.dispatch({type:actions.DROP_TOKEN});
     this.storeService.dropStore();

@@ -23,9 +23,9 @@ export const ROUTES: Routes = [
     component: CoursesPage,
     canActivate:[LoggedInGuard],
     children: [
-      {path: '', component:CoursesList},
-      {path: AppPaths.COURSES_NEW, component: CoursesNew},
-      {path: AppPaths.COURSES_EDIT, component: CoursesEdit}
+      {path: '', component:CoursesList, outlet: 'list'},
+      {path: AppPaths.COURSES_NEW, component: CoursesNew, outlet: 'details'},
+      {path: AppPaths.COURSES_EDIT, component: CoursesEdit, outlet: 'details'}
     ]
   },
   {path: '**', component: NoContent},
