@@ -1,0 +1,16 @@
+<div class="module" [class.open]="opened">
+  <button class="search-button" (click)="open()" (keypress.enter)="open()" [class.active]="active">
+    search
+    <svg width="24" height="24">
+      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-search')}}"/>
+    </svg>
+  </button>
+  <button class="search-close-button" (click)="close()" (keypress.enter)="close()">
+    close
+    <svg width="24" height="24">
+      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
+    </svg>
+  </button>
+  <input name="q" type="text" id="search-input" autocomplete="off" [(ngModel)]="query" (keypress.enter)="search(query)">
+  <label for="search-input" [class.hidden]="query.length>0">Search</label>
+</div>

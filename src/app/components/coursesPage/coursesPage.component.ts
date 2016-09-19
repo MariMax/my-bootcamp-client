@@ -1,23 +1,24 @@
 import {Component} from '@angular/core';
 import {ComponentBase} from '../componentBase';
-import {AuthService} from '../../services';
 
 @Component({
-  selector:`courses-list`,
-  styleUrls:[`./styles.css`],
-  templateUrl: './template.html'
+  selector: `courses-page`,
+  styleUrls: ['./styles.css'],
+  templateUrl: './template.html',
+  host: {
+    style: `flex: 1;
+            overflow: hidden;
+            display:flex;`
+  }
 })
-export class CoursesPage extends ComponentBase{
+export class CoursesPage extends ComponentBase {
+  loading: boolean = true;
 
-  constructor(private auth:AuthService){
+  constructor() {
     super();
   }
 
-  signout(){
-    this.auth.signout();
-  }
-
-  onDestroy(){
+  onDestroy() {
 
   }
 }

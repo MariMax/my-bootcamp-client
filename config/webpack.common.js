@@ -182,6 +182,10 @@ module.exports = {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      __dirname
+    ),
 
     /*
      * Plugin: ForkCheckerPlugin

@@ -1,0 +1,16 @@
+<header class="header">
+  <section class="logo">
+    <img src="../../../assets/img/logo.svg" alt="work for food">
+  </section>
+  <!--<breadcrumbs></breadcrumbs>-->
+  <section class="user-info">
+    <div class="user-name" [class.hide]="!showLogin">{{login}}</div>
+  </section>
+  <search-input [query]="query" (action)="searchAction($event)"></search-input>
+  <a class="logout" (click)="logout()" (keypress.enter)="logout()" href="" >
+    logout
+    <svg width="20" height="20">
+      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-logout')}}"/>
+    </svg>
+  </a>
+</header>

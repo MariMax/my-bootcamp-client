@@ -1,6 +1,12 @@
-<div class="module">
-  Cources Page
-
-  <button (click)="signout()" >SignOut</button>
-  <router-outlet></router-outlet>
-</div>
+<section class="module">
+  <page-header></page-header>
+  <section class="content">
+    <loader *ngIf="loading"></loader>
+    <section class="main-section">
+      <router-outlet name="list"></router-outlet>
+    </section>
+    <section class="details-section">
+      <router-outlet name="details"></router-outlet>
+    </section>
+  </section>
+</section>

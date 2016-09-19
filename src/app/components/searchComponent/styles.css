@@ -1,0 +1,115 @@
+@import '../../../assets/css/variables.css';
+
+.module{
+  box-sizing: border-box;
+  color: var(--white);
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+  position: relative;
+  width: 2.4rem;
+  margin-right: 1rem;
+}
+
+.module.open{
+  width: 24rem;
+}
+
+.module button{
+  background: transparent center center no-repeat;
+  background-size: 24rem 24rem;
+  cursor: pointer;
+  border: 0;
+  overflow: hidden;
+  color: var(--white);
+  z-index: 2;
+  font-size: 0;
+  box-sizing: border-box;
+  position: absolute;
+  top: -.3rem;
+  padding: 0;
+}
+
+.module .search-close-button{
+  display: none;
+  opacity: 0;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.module.open .search-close-button{
+  display: inline-block;
+  opacity: 1;
+  right: 0;
+}
+
+.module input{
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid var(--first-level);
+  border-radius: 0;
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0 2.4rem;
+  width: 100%;
+  text-align: left;
+  background: 0;
+  box-shadow: none;
+  color: var(--white);
+  visibility: hidden;
+  padding-bottom: .3rem;
+}
+
+.module label{
+  box-sizing: border-box;
+  bottom: 0;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--first-level);
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  text-transform: none;
+  visibility: hidden;
+  padding-left: 2.4rem;
+}
+
+.module.open input,
+.module.open label{
+  visibility: visible;
+}
+
+.module label.hidden{
+  visibility: hidden;
+}
+
+.module label:after{
+  box-sizing: border-box;
+  background-color: var(--first-level);
+  bottom: 0;
+  content: '';
+  height: 2px;
+  width: 1rem;
+  left: 45%;
+  position: absolute;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+.module input:focus + label:after{
+  left:0;
+  width: 100%;
+  visibility: visible;
+}
+
+.module button:focus,
+.module input:focus{
+  outline: 0;
+}

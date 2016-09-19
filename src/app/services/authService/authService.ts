@@ -47,7 +47,7 @@ export class AuthService {
     this.storeService.dispatch({type:actions.SET_USER, payload: userData.id});
     this.storeService.saveGlobalItem(userData, 'id');
 
-    this.api.setHeaders({Authorization: `Bearer ${jwt}`});
+    this.api.setHeaders({Authorization: `JWT ${jwt}`});
     this.signedOut = false;
   }
 

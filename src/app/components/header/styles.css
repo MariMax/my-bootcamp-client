@@ -1,0 +1,59 @@
+@import '../../../assets/css/variables.css';
+
+.header{
+  flex:1;
+  display: flex;
+  padding: 2rem;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 1.6rem;
+  align-items: center;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.user-info{
+  margin-left: auto;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-name{
+  margin-right: 1rem;
+  width: auto;
+  transition: .2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-name.hide{
+  width: 0;
+  margin-right: 0;
+}
+
+.logout{
+  font-size: 0;
+  color: var(--white);
+}
+
+.logout:hover, .logout:focus, .logout:active{
+  color: var(--orange);
+}
+
+.logout svg{
+  height: 1.6rem;
+  padding-bottom: .3rem
+}
+
+.logo{
+  width: 4rem;
+  height: 4rem;
+  flex-basis: 4rem;
+  flex-shrink: 0;
+}
+
+.logo img{
+  width: 100%;
+  height: 100%;
+}

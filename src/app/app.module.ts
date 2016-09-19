@@ -15,10 +15,13 @@ import {CoursesPage} from './components/coursesPage';
 import {CoursesList} from './components/coursesList';
 import {CoursesNew} from './components/coursesNew';
 import {CoursesEdit} from './components/coursesEdit';
+import {PageHeader} from './components/header';
+import {LoaderComponent} from './components/loader';
+import {SearchInput} from './components/searchComponent';
 
 
 import {globalStorageReducer} from './services/storeService/reducers';
-import {ApiService, AuthService, StoreService, SvgUrlResolverService} from './services';
+import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesService} from './services';
 import {ToasterService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard} from './guards';
 
@@ -54,7 +57,10 @@ reducerSettings = compose(eraseStore, combineReducers);
     CoursesEdit,
     CoursesPage,
     LatinLettersOnlyDirective,
-    LettersAndNumbersDirective
+    LettersAndNumbersDirective,
+    PageHeader,
+    LoaderComponent,
+    SearchInput
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,8 @@ reducerSettings = compose(eraseStore, combineReducers);
     ToasterService,
     LoggedOutGuard,
     LoggedInGuard,
-    SvgUrlResolverService
+    SvgUrlResolverService,
+    CoursesService
   ]
 })
 export class AppModule {
