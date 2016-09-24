@@ -1,7 +1,7 @@
 import {EventEmitter, Component, ViewEncapsulation, Input, Output} from '@angular/core';
 import {SvgUrlResolverService} from '../../services'
 
-export enum SearchComponentActions{
+export enum SearchComponentActions {
   search,
   open,
   close
@@ -34,11 +34,14 @@ export class SearchInput {
     this.action.emit({type: SearchComponentActions.close});
     this.opened = false;
     this.active = false;
-    this.action.emit({type: SearchComponentActions.search, payload: ''});
+    this.query = '';
+    this.action.emit({type: SearchComponentActions.search, payload: this.query});
   }
 
   search(query: string) {
+    this.action.emit({type: SearchComponentActions.close});
     this.opened = false;
+    this.active = !!query.length;
     this.action.emit({type: SearchComponentActions.search, payload: query});
   }
 }

@@ -18,6 +18,14 @@
   transform: translateX(0%);
 }
 
+.container button{
+  display: none;
+}
+
+.container.active button{
+  display: block;
+}
+
 .toast {
   background: var(--white);
   padding: 1rem 1.5rem;

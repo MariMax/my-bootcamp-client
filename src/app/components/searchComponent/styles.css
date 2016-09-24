@@ -15,6 +15,15 @@
 
 .module.open{
   width: 24rem;
+  color: var(--white);
+}
+
+.module.open button.active{
+  color: var(--white);
+}
+
+.module button.active{
+  color: var(--orange);
 }
 
 .module button{
@@ -109,7 +118,6 @@
   visibility: visible;
 }
 
-.module button:focus,
 .module input:focus{
   outline: 0;
 }

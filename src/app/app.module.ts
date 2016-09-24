@@ -25,7 +25,7 @@ import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesSer
 import {ToasterService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard} from './guards';
 
-import {LatinLettersOnlyDirective, LettersAndNumbersDirective} from './directives'
+import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus} from './directives'
 
 import {combineReducers} from "@ngrx/store";
 import {compose} from "@ngrx/core/compose";
@@ -58,6 +58,7 @@ reducerSettings = compose(eraseStore, combineReducers);
     CoursesPage,
     LatinLettersOnlyDirective,
     LettersAndNumbersDirective,
+    Focus,
     PageHeader,
     LoaderComponent,
     SearchInput

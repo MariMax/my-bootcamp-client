@@ -81,7 +81,7 @@ export class LoginComponent extends ComponentBase {
         this.submitPending = false;
         this.router.navigate(['/courses']);
       }, ()=> {
-        this.loginForm.controls['password']['updateValue']('');
+        this.loginForm.controls['password']['setValue']('');
         this.submitPending = false;
         subscription.unsubscribe()
       });

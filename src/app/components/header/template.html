@@ -7,10 +7,10 @@
     <div class="user-name" [class.hide]="!showLogin">{{login}}</div>
   </section>
   <search-input [query]="query" (action)="searchAction($event)"></search-input>
-  <a class="logout" (click)="logout()" (keypress.enter)="logout()" href="" >
+  <button class="logout" (click)="logout()" >
     logout
     <svg width="20" height="20">
       <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-logout')}}"/>
     </svg>
-  </a>
+  </button>
 </header>

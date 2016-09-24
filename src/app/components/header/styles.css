@@ -35,6 +35,15 @@
 .logout{
   font-size: 0;
   color: var(--white);
+
+  background: transparent center center no-repeat;
+  background-size: 24rem 24rem;
+  cursor: pointer;
+  border: 0;
+  overflow: hidden;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 0 0 .3rem 0;
 }
 
 .logout:hover, .logout:focus, .logout:active{
