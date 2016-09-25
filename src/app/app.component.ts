@@ -1,17 +1,6 @@
-/*
- * Angular 2 decorators and services
- */
-
 import { Component, ViewEncapsulation } from '@angular/core';
 import {FBConnector} from './services';
 import {fbAppID} from './appConfig';
-
-// import { AppState } from './app.service';
-
-/*
- * App Component
- * Top Level Component
- */
 
 @Component({
   selector: 'app',
@@ -24,18 +13,7 @@ import {fbAppID} from './appConfig';
       <toaster></toaster>
       <router-outlet></router-outlet>
     </main>
-
-    <!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
-
-    <footer>
-      <!--<span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>-->
-      <!--<div>-->
-        <!--<a [href]="url">-->
-          <!--<img [src]="angularclassLogo" width="25%">-->
-        <!--</a>-->
-      <!--</div>-->
-    </footer>
-  `
+    <footer></footer>`
 })
 export class App {
   name = 'Angular 2 Webpack Starter';

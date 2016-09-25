@@ -26,34 +26,34 @@
 
 .img {
   z-index: 1011;
-  flex-basis: 15rem;
-  flex-shrink: 0;
+  width: 15%;
+  max-width: 15rem;
 }
 
 .img svg {
-  width: 10em;
-  height: 10em;
+  width: 50%;
+  height: 50%;
 }
 
 .description {
-  font-size: 3rem;
+  font-size: 2rem
 }
 
 @keyframes first-gear-rotate {
   0% {
-    transform: translate(10%, 0%) rotate(6deg);
+    transform: translate(15%, 40%) rotate(25deg);
   }
   100% {
-    transform: translate(10%, 0%) rotate(366deg);
+    transform: translate(15%, 40%) rotate(385deg);
   }
 }
 
 @keyframes second-gear-rotate {
   0% {
-    transform: translate(-15%, 50%) rotate(15deg);
+    transform: translate(85%, 0%) rotate(15deg);
   }
   100% {
-    transform: translate(-15%, 50%) rotate(375deg);
+    transform: translate(85%, 0%) rotate(375deg);
   }
 }
 

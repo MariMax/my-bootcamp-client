@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ComponentBase} from '../componentBase';
 
 @Component({
   selector: `courses-page`,
@@ -11,14 +10,4 @@ import {ComponentBase} from '../componentBase';
             display:flex;`
   }
 })
-export class CoursesPage extends ComponentBase {
-  loading: boolean = true;
-
-  constructor() {
-    super();
-  }
-
-  onDestroy() {
-
-  }
-}
+export class CoursesPage{}

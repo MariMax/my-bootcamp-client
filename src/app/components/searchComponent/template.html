@@ -1,11 +1,11 @@
 <div class="module" [class.open]="opened">
+  <input [focus]="opened" name="q" type="text" id="search-input" autocomplete="off" [(ngModel)]="query" (keyup.enter)="search(query)">
   <button class="search-button" (click)="open()" [class.active]="active">
     search
     <svg width="24" height="24">
       <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-search')}}"/>
     </svg>
   </button>
-  <input [focus]="opened" name="q" type="text" id="search-input" autocomplete="off" [(ngModel)]="query" (keyup.enter)="search(query)">
   <button class="search-close-button" (click)="close()">
     close
     <svg width="24" height="24">

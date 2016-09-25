@@ -1,10 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {ComponentBase} from '../../components/componentBase';
+import {StoreService} from '../../services';
+import {LoaderService} from './loader.service';
 
 @Component({
   selector: `loader`,
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./styles.css'],
-  template: `<div class="module">
+  template: `<div class="module" *ngIf="shown">
                 <div class="cover"></div>
                 <div class="img">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 60 60" preserveAspectRatio="xMidYMid" class="first-gear">
@@ -19,5 +22,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
                 </div>
               </div>`
 })
-export class LoaderComponent {
+export class LoaderComponent extends ComponentBase{
+  store: any;
+  shown:boolean;
+  constructor(private storageService: StoreService, private loaderService: LoaderService){
+    super();
+    this.store = this.storageService.getStore();
+
+    this._subscription(this.store.select(this.loaderService.storageField)
+      .subscribe(state=>this.shown = state))
+  }
+
+  onDestroy(){}
 }
