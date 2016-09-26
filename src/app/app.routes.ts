@@ -12,20 +12,19 @@ export const AppPaths = {
   LOGIN: 'login',
   COURSES: 'courses',
   COURSES_NEW: 'new',
-  COURSES_EDIT: ':id'
+  COURSES_EDIT: 'edit'
 };
 
 export const ROUTES: Routes = [
   {path: AppPaths.LOGIN, component: LoginComponent, canActivate:[LoggedOutGuard]},
-  {path: '', redirectTo: AppPaths.COURSES, pathMatch: 'full'},
+  {path: '', redirectTo: `${AppPaths.COURSES}/(list:list)`, pathMatch: 'full'},
   {
     path: AppPaths.COURSES,
     component: CoursesPage,
     canActivate:[LoggedInGuard],
     children: [
-      {path: '', component:CoursesList, outlet: 'list'},
-      {path: AppPaths.COURSES_NEW, component: CoursesNew, outlet: 'details'},
-      {path: AppPaths.COURSES_EDIT, component: CoursesEdit, outlet: 'details'}
+      {path: 'list', component:CoursesList, outlet: 'list'},
+      {path: 'edit/:id', component: CoursesEdit, outlet: 'details'}
     ]
   },
   {path: '**', component: NoContent},

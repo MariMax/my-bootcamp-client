@@ -4,6 +4,7 @@ import {CoursesService, Course} from '../../services';
 import {LoaderService} from '../loaderModule/loader.service';
 import {Router} from "@angular/router";
 import {StoreService} from '../../services';
+import {AppPaths} from '../../app.routes';
 
 
 @Component({
@@ -54,7 +55,9 @@ export class CoursesList extends ComponentBase {
   }
 
   editCourse(course:Course){
-    this.router.navigate([])
+    const route = `/${AppPaths.COURSES}/(list:list//details:${AppPaths.COURSES_EDIT}/${course.id})`;
+    debugger;
+    this.router.navigateByUrl(route);
   }
 
   onDestroy() {

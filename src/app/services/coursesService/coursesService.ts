@@ -103,7 +103,7 @@ export class CoursesService {
 
   addCourse(course:any){
     return this.api.post('/course', course)
-      .map(course=>{
+      .do(course=>{
         const newCourse = this.buildCourses([course]);
         const state = this.storeService.getState();
         const itemIds = [...state[this.storageFiled].items, newCourse.id];

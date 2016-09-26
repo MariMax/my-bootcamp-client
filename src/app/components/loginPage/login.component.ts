@@ -7,6 +7,7 @@ import {AuthService, StoreService, SvgUrlResolverService} from '../../services';
 import {ComponentBase} from '../componentBase/componentBase';
 import {loginFormReducer} from './reducers';
 import * as actions from './actions';
+import {AppPaths} from '../../app.routes';
 
 @Component({
   selector: 'login',
@@ -79,7 +80,7 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigate(['/courses']);
+        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
       }, ()=> {
         this.loginForm.controls['password']['setValue']('');
         this.submitPending = false;
@@ -95,7 +96,7 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigate(['/courses']);
+        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
       },()=> {
         this.submitPending = false;
         subscription.unsubscribe()
@@ -114,7 +115,7 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigate(['/courses']);
+        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
         this.toggleRegister()
       }, ()=> {
         subscription.unsubscribe();
