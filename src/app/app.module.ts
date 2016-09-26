@@ -18,6 +18,7 @@ import {CoursesEdit} from './components/coursesEdit';
 import {PageHeader} from './components/header';
 import {LoaderComponent} from './components/loaderModule';
 import {SearchInput} from './components/searchComponent';
+import {CourseCard} from './components/courseCard';
 
 
 import {globalStorageReducer} from './services/storeService/reducers';
@@ -63,7 +64,8 @@ reducerSettings = compose(eraseStore, combineReducers);
     Focus,
     PageHeader,
     LoaderComponent,
-    SearchInput
+    SearchInput,
+    CourseCard
   ],
   imports: [
     BrowserModule,

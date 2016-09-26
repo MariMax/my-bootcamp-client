@@ -1,0 +1,91 @@
+@import '../../../assets/css/variables.css';
+
+.module{
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: var(--shadow2);
+  background-color: var(--white);
+  display: flex;
+  font-size: 1.3rem;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  overflow: hidden;
+}
+
+.main-data h3{
+  margin: 0;
+  flex:1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.description::first-letter,
+.main-data h3::first-letter{
+  text-transform: capitalize;
+}
+
+.main-data span:nth-child(2){
+  flex:1;
+}
+
+.main-data span{
+  flex: 2;
+  text-align: right;
+}
+
+.main-data{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+
+.description{
+  text-indent: 2rem;
+  height: 5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1rem;
+}
+
+.controls{
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-flow: column nowrap;
+  font-size: 1.3rem;
+     padding: 0 1rem;
+}
+
+.controls button{
+      display: inline-block;
+      position: relative;
+      border-radius: 2px;
+      font-size: 1rem;
+      background-color: var(--white);
+      color: var(--gray);
+      text-align: center;
+      text-transform: uppercase;
+      transition: box-shadow .2s ease;
+      cursor: pointer;
+      border: none;
+      padding: .5rem;
+      font-size: 1.3rem;
+}
+
+.controls button:hover, .controls button:focus{
+  box-shadow: var(--shadow1);
+}
+
+.controls button:active{
+  box-shadow: var(--shadow3);
+}
+
+

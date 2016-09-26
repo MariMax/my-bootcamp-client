@@ -10,11 +10,15 @@
   width: 100%;
   flex:1;
   position: relative;
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
 }
 
 .main-section{
-
+  flex: 1;
+  overflow: hidden;
+  flex-flow: column;
+  display: flex;
 }
 
 .details-section{

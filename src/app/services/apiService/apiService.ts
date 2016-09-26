@@ -58,7 +58,6 @@ export class ApiService {
       {headers: this.headers}
     )
       .catch(this.checkForError.bind(this))
-      .map((r:Response)=>r.json())
   }
 
   put(path: string, body: any): Observable<any> {

@@ -1,3 +1,10 @@
 <div class="module">
+  <course-card
+    *ngFor="let course of collection"
+    [course]="course"
+    (edit)="editCourse($event)"
+    (remove)="removeCourse($event)">
 
+  </course-card>
+  <div class="empty-list">nothing here yet</div>
 </div>

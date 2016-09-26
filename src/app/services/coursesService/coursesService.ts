@@ -5,6 +5,7 @@ import {SAVE_GLOBAL_ITEM} from '../storeService/actions';
 import {coursesListReducer} from './reducers';
 import * as actions from './actions';
 import {SAVE_FILTERED_COURSES} from "./actions/index";
+import {SAVE_COURSES} from "./actions/index";
 
 export class Owner {
   constructor(public id: string, public login: string) {}
@@ -63,7 +64,7 @@ export class CoursesService {
         payload: courses.map(i=>i.id)
       }))
       .map(()=>this.filterCourses())
-      .flatMap(()=>this.getFilteredItems())
+      .map(()=>this.getFilteredItems())
   }
 
   filterCourses(filter=''){
@@ -81,5 +82,37 @@ export class CoursesService {
     const state = this.storeService.getState();
     const itemIds = state[this.storageFiled].filtered;
     return itemIds.map(i=>state.globalStorage[i]);
+  }
+
+  removeCourse(id){
+    return this.api.delete(`/course?id=${id}`)
+      .do(()=>{
+        const state = this.storeService.getState();
+        const itemIds = state[this.storageFiled].items.filter(i=>i!==id);
+        const filteredItems = state[this.storageFiled].filtered.filter(i=>i!==id);
+        this.storeService.dispatch({
+          type: SAVE_FILTERED_COURSES,
+          payload: filteredItems
+        });
+        this.storeService.dispatch({
+          type: SAVE_COURSES,
+          payload: itemIds
+        });
+      });
+  }
+
+  addCourse(course:any){
+    return this.api.post('/course', course)
+      .map(course=>{
+        const newCourse = this.buildCourses([course]);
+        const state = this.storeService.getState();
+        const itemIds = [...state[this.storageFiled].items, newCourse.id];
+        const currentFilter = state[this.storageFiled].filter;
+        this.storeService.dispatch({
+          type: SAVE_COURSES,
+          payload: itemIds
+        });
+        this.filterCourses(currentFilter);
+      });
   }
 }

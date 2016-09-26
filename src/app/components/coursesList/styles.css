@@ -1,0 +1,24 @@
+@import '../../../assets/css/variables.css';
+
+.module{
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
+  justify-content: flex-start;
+  flex-flow: column nowrap;
+}
+
+.empty-list{
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 2rem;
+  color: var(--light-gray);
+}
+
+course-card + .empty-list{
+  display: none;
+}
