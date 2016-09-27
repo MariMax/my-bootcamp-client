@@ -36,10 +36,7 @@ export class CoursesList extends ComponentBase {
       });
 
       this._subscription(this.store.select(state=>({coursesState:state[this.coursesService.storageFiled].filtered, global:state.globalStorage}))
-        .subscribe(state=>{
-          console.log(state);
-          this.collection = state.coursesState.map(i=>state.global[i])
-        }))
+        .subscribe(state=>this.collection = state.coursesState.map(i=>state.global[i])))
   }
 
   removeCourse(course:Course){
@@ -56,7 +53,6 @@ export class CoursesList extends ComponentBase {
 
   editCourse(course:Course){
     const route = `/${AppPaths.COURSES}/(list:list//details:${AppPaths.COURSES_EDIT}/${course.id})`;
-    debugger;
     this.router.navigateByUrl(route);
   }
 

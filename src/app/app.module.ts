@@ -26,26 +26,11 @@ import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesSer
 import {LoaderService} from './components/loaderModule/loader.service'
 
 import {ToasterService} from './components/toaster';
-import {LoggedOutGuard, LoggedInGuard} from './guards';
+import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards';
 
-import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus} from './directives'
-
-import {combineReducers} from "@ngrx/store";
-import {compose} from "@ngrx/core/compose";
+import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus} from './directives';
 
 import {useHash} from './appConfig';
-
-let reducerSettings;
-const eraseStore = (reducer: Function) => (state, action) => {
-  if (action.type === 'ERASE_STORE') {
-    debugger;
-    //does not work :'(
-    state = {};
-  }
-  return reducer(state, action);
-};
-
-reducerSettings = compose(eraseStore, combineReducers);
 
 
 @NgModule({
@@ -71,7 +56,7 @@ reducerSettings = compose(eraseStore, combineReducers);
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.provideStore(reducerSettings({globalStorage: globalStorageReducer})),
+    StoreModule.provideStore({}),
     HttpModule,
     RouterModule.forRoot(ROUTES, {useHash: useHash})
   ],
@@ -82,6 +67,7 @@ reducerSettings = compose(eraseStore, combineReducers);
     ToasterService,
     LoggedOutGuard,
     LoggedInGuard,
+    RedirectResolver,
     SvgUrlResolverService,
     CoursesService,
     LoaderService

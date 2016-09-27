@@ -4,9 +4,9 @@ import {CoursesPage} from './components/coursesPage';
 import {CoursesList} from './components/coursesList';
 import {LoginComponent} from './components/loginPage';
 import {CoursesNew} from './components/coursesNew';
-import {CoursesEdit} from './components/coursesEdit';
+import {CoursesEdit} from './components/coursesEdit'; 
 
-import {LoggedOutGuard, LoggedInGuard} from './guards'
+import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards'
 
 export const AppPaths = {
   LOGIN: 'login',
@@ -17,7 +17,7 @@ export const AppPaths = {
 
 export const ROUTES: Routes = [
   {path: AppPaths.LOGIN, component: LoginComponent, canActivate:[LoggedOutGuard]},
-  {path: '', redirectTo: `${AppPaths.COURSES}/(list:list)`, pathMatch: 'full'},
+  {path: '', resolve:{redirect:RedirectResolver}, component:NoContent},
   {
     path: AppPaths.COURSES,
     component: CoursesPage,

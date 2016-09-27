@@ -1,5 +1,5 @@
 <div class="module" [class.open]="opened">
-  <input [focus]="opened" name="q" type="text" id="search-input" autocomplete="off" [(ngModel)]="query" (keyup.enter)="search(query)">
+  <input [focus]="opened" name="q" type="text" id="search-input" autocomplete="off" [(ngModel)]="query" (keydown.enter)="search(query)">
   <button class="search-button" (click)="open()" [class.active]="active">
     search
     <svg width="24" height="24">

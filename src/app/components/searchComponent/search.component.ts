@@ -15,7 +15,7 @@ export enum SearchComponentActions {
 })
 export class SearchInput {
   @Input() query: string;
-  @Output() action = new EventEmitter(false);
+  @Output() action = new EventEmitter();
 
   opened: boolean = false;
   active: boolean = false;
@@ -27,10 +27,10 @@ export class SearchInput {
     this.action.emit({
       type: SearchComponentActions.open
     });
-    this.opened = true;
     if (this.opened){
-      this.search(this.query);
+      return this.search(this.query);
     }
+    this.opened = true;
   }
 
   close() {

@@ -29,8 +29,10 @@ export class LoaderComponent extends ComponentBase{
     super();
     this.store = this.storageService.getStore();
 
-    this._subscription(this.store.select(this.loaderService.storageField)
-      .subscribe(state=>this.shown = state))
+    this._subscription(this.store.select(state=>state[this.loaderService.storageField])
+      .subscribe(state=>{
+        this.shown = state
+      }))
   }
 
   onDestroy(){}
