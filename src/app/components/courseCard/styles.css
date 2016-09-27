@@ -7,6 +7,7 @@
   background-color: var(--white);
   display: flex;
   font-size: 1.3rem;
+  overflow: hidden;
 }
 
 .info{
@@ -31,11 +32,13 @@
 
 .main-data span:nth-child(2){
   flex:1;
+  white-space: nowrap;
 }
 
 .main-data span{
   flex: 2;
   text-align: right;
+  white-space: nowrap;
 }
 
 .main-data{

@@ -1,0 +1,14 @@
+.module{
+  width: 0;
+  transition: width .5s ease;
+}
+
+.module.active{
+  width:90vw;
+}
+
+@media screen and (min-width: 760px){
+  .module.active{
+    width:50vw;
+  }
+}
