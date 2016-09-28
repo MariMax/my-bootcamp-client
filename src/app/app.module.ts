@@ -13,8 +13,8 @@ import {LoginComponent} from './components/loginPage';
 import {ToasterComponent} from './components/toaster';
 import {CoursesPage} from './components/coursesPage';
 import {CoursesList} from './components/coursesList';
-import {CoursesNew} from './components/coursesNew';
 import {CoursesEdit} from './components/coursesEdit';
+import {CourseEditForm} from './components/courseEditForm';
 import {PageHeader} from './components/header';
 import {LoaderComponent} from './components/loaderModule';
 import {SearchInput} from './components/searchComponent';
@@ -41,7 +41,6 @@ import {useHash} from './appConfig';
     LoginComponent,
     ToasterComponent,
     CoursesList,
-    CoursesNew,
     CoursesEdit,
     CoursesPage,
     LatinLettersOnlyDirective,
@@ -50,7 +49,8 @@ import {useHash} from './appConfig';
     PageHeader,
     LoaderComponent,
     SearchInput,
-    CourseCard
+    CourseCard,
+    CourseEditForm
   ],
   imports: [
     BrowserModule,

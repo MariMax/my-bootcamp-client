@@ -10,10 +10,12 @@ export class Focus {
     }
   }
 
+  @Input() delay:number = 0;
+
   constructor(public elem: ElementRef) {
   }
 
   focusAction() {
-      setTimeout(()=>this.elem.nativeElement.focus());
+      setTimeout(()=>this.elem.nativeElement.focus(), this.delay);
   }
 }

@@ -1,4 +1,10 @@
 <div class="module" [class.active]="active">
-  Cources Edit {{id}}
-  <button (click)="close()" ></button>
+  <button class="close" (click)="close()" >
+    close
+    <svg width="20" height="20">
+      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
+    </svg>
+  </button>
+
+  <course-edit-form [courseId]="id" (done)="close()"></course-edit-form>
 </div>

@@ -1,10 +1,40 @@
 .module{
   width: 0;
-  transition: width .5s ease;
+  transition: all .5s ease;
+  box-shadow: var(--shadow2);
+  background-color: var(--white);
+  display: flex;
+  flex:1;
+  font-size: 1.3rem;
+  overflow: hidden;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  flex-flow: column nowrap;
 }
 
 .module.active{
-  width:90vw;
+  width:100vw;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.close{
+  font-size: 0;
+  color: var(--gray);
+  align-self: flex-start;
+
+  background: transparent center center no-repeat;
+  background-size: 24rem 24rem;
+  cursor: pointer;
+  border: 0;
+  overflow: hidden;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 0 0 .3rem 0;
+}
+
+.close:hover, .close:focus, .close:active{
+  color: var(--orange);
 }
 
 @media screen and (min-width: 760px){

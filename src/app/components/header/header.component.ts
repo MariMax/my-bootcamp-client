@@ -16,7 +16,6 @@ import {stat} from "fs";
   },
 })
 export class PageHeader extends ComponentBase {
-  store: any;
   login: string = '';
   showLogin: boolean = true;
   query: string;
@@ -27,10 +26,8 @@ export class PageHeader extends ComponentBase {
               private authService: AuthService) {
     super();
 
-    this.store = this.storeService.getStore();
-
     this._subscription(
-      this.store.select(state=>({
+      this.storeService.select(state=>({
         user: state.auth.user && state.globalStorage[state.auth.user],
         filter: state[this.coursesService.storageFiled].filter
       }))

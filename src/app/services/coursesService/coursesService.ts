@@ -3,12 +3,10 @@ import {ApiService} from "../apiService/apiService";
 import {StoreService} from '../storeService/storeService';
 import {SAVE_GLOBAL_ITEM} from '../storeService/actions';
 import {coursesListReducer} from './reducers';
-import * as actions from './actions';
-import {SAVE_FILTERED_COURSES} from "./actions/index";
-import {SAVE_COURSES} from "./actions/index";
+import {SAVE_FILTERED_COURSES, COURSES_FETCHING, COURSES_FETCHED, SAVE_COURSES} from "./actions";
 
 export class Owner {
-  constructor(public id: string, public login: string) {}
+  constructor(public id: string, public login: string) { }
 }
 
 export class Course {
@@ -20,36 +18,36 @@ export class Course {
   public authors: Array<string>;
   public date: Date;
 
-  constructor(options:any){
+  constructor(options: any) {
     this.title = options.title;
     this.id = options.id;
     this.owner = options.owner;
     this.description = options.description;
     this.duration = options.duration;
-    this.date = new Date(options.date||Date.now());
+    this.date = new Date(options.date || Date.now());
     this.authors = options.authors;
   }
 
-  toString(){
+  toString() {
     return `${this.id} ${this.title} ${this.description} ${this.duration} ${this.date}`;
   }
 }
 
 @Injectable()
 export class CoursesService {
-  storageFiled:string = 'coursesList';
+  storageFiled: string = 'coursesList';
   constructor(private storeService: StoreService,
-              private api: ApiService) {
+    private api: ApiService) {
 
     this.storeService.addReducer(this.storageFiled, coursesListReducer);
   }
 
   buildCourses(items) {
-    return items.map(i=>{
+    return items.map(i => {
       const course = new Course(i);
       this.storeService.dispatch({
         type: SAVE_GLOBAL_ITEM,
-        payload: {item:course, field:'id'}
+        payload: { item: course, field: 'id' }
       });
 
       return course;
@@ -57,39 +55,43 @@ export class CoursesService {
   }
 
   downloadCollection() {
+    this.storeService.dispatch({ type: COURSES_FETCHING });
     return this.api.get('/course')
-      .map(res=>this.buildCourses(res.items))
-      .do(courses=>this.storeService.dispatch({
-        type: actions.SAVE_COURSES,
-        payload: courses.map(i=>i.id)
+      .map(res => this.buildCourses(res.items))
+      .do(courses => this.storeService.dispatch({
+        type: SAVE_COURSES,
+        payload: courses.map(i => i.id)
       }))
-      .map(()=>this.filterCourses())
-      .map(()=>this.getFilteredItems())
+      .do(courses => this.storeService.dispatch({
+        type: COURSES_FETCHED,
+      }))
+      .map(() => this.filterCourses())
+      .map(() => this.getFilteredItems())
   }
 
-  filterCourses(filter=''){
+  filterCourses(filter = '') {
     const state = this.storeService.getState();
     const itemIds = state[this.storageFiled].items;
-    const filteredIds = itemIds.filter(i=>state.globalStorage[i].toString().indexOf(filter)>=0);
+    const filteredIds = itemIds.filter(i => state.globalStorage[i].toString().indexOf(filter) >= 0);
     this.storeService.dispatch({
-      type:SAVE_FILTERED_COURSES,
+      type: SAVE_FILTERED_COURSES,
       payload: filteredIds
     });
     return filteredIds;
   }
 
-  getFilteredItems(){
+  getFilteredItems() {
     const state = this.storeService.getState();
     const itemIds = state[this.storageFiled].filtered;
-    return itemIds.map(i=>state.globalStorage[i]);
+    return itemIds.map(i => state.globalStorage[i]);
   }
 
-  removeCourse(id){
+  removeCourse(id) {
     return this.api.delete(`/course?id=${id}`)
-      .do(()=>{
+      .do(() => {
         const state = this.storeService.getState();
-        const itemIds = state[this.storageFiled].items.filter(i=>i!==id);
-        const filteredItems = state[this.storageFiled].filtered.filter(i=>i!==id);
+        const itemIds = state[this.storageFiled].items.filter(i => i !== id);
+        const filteredItems = state[this.storageFiled].filtered.filter(i => i !== id);
         this.storeService.dispatch({
           type: SAVE_FILTERED_COURSES,
           payload: filteredItems
@@ -101,9 +103,9 @@ export class CoursesService {
       });
   }
 
-  addCourse(course:any){
+  addCourse(course: any) {
     return this.api.post('/course', course)
-      .do(course=>{
+      .do(course => {
         const newCourse = this.buildCourses([course]);
         const state = this.storeService.getState();
         const itemIds = [...state[this.storageFiled].items, newCourse.id];

@@ -51,7 +51,6 @@ export class ToasterComponent extends ComponentBase{
   message:string;
   type:string = 'default';
   active:boolean = false;
-  store;
   timer;
 
   constructor(
@@ -59,9 +58,7 @@ export class ToasterComponent extends ComponentBase{
     private service: ToasterService){
     super();
 
-    this.store = this.storeService.getStore();
-
-    this._subscription(this.store.select('toaster')
+    this._subscription(this.storeService.select('toaster')
       .subscribe(state=>{
         this.message = state.message;
         this.type = ToasterTypes[state.type];

@@ -25,23 +25,21 @@ export class LoginComponent extends ComponentBase {
   loginForm: FormGroup;
   actions: any;
   currentForm: any;
-  store: any;
   submitPending: boolean = false;
 
 
   constructor(private authService: AuthService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private svgUrlResolver: SvgUrlResolverService,
-              private storeService: StoreService) {
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private svgUrlResolver: SvgUrlResolverService,
+    private storeService: StoreService) {
     super();
 
     this.storeService.addReducer('loginForm', loginFormReducer);
     this.actions = actions;
-    this.store = this.storeService.getStore();
 
-    this._subscription(this.store.select('loginForm')
-      .subscribe(value=> {
+    this._subscription(this.storeService.select('loginForm')
+      .subscribe(value => {
         this.currentForm = value
       }));
 
@@ -55,18 +53,18 @@ export class LoginComponent extends ComponentBase {
       passwords: this.formBuilder.group({
         password: ['', Validators.required],
         confirmation: ['', Validators.required]
-      }, {validator: equalValidator})
+      }, { validator: equalValidator })
     })
   }
 
   toggleRegister($event?) {
     $event && $event.preventDefault();
     if (this.currentForm === this.actions.LOGIN_FORM) {
-      return this.storeService.dispatch({type: this.actions.REGISTER_FORM})
+      return this.storeService.dispatch({ type: this.actions.REGISTER_FORM })
     }
 
     if (this.currentForm === this.actions.REGISTER_FORM) {
-      return this.storeService.dispatch({type: this.actions.LOGIN_FORM})
+      return this.storeService.dispatch({ type: this.actions.LOGIN_FORM })
     }
   }
 
@@ -80,8 +78,8 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
-      }, ()=> {
+        this.router.navigate([AppPaths.courses.path, {outlets: {list: [AppPaths.courses.children.list.path]}}]);
+      }, () => {
         this.loginForm.controls['password']['setValue']('');
         this.submitPending = false;
         subscription.unsubscribe()
@@ -96,12 +94,13 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
-      },()=> {
+        this.router.navigate([AppPaths.courses.path, {outlets: {list: [AppPaths.courses.children.list.path]}}]);
+      }, () => {
         this.submitPending = false;
         subscription.unsubscribe()
       });
 
+    return false;
 
   }
 
@@ -115,9 +114,9 @@ export class LoginComponent extends ComponentBase {
       .subscribe(() => {
         subscription.unsubscribe();
         this.submitPending = false;
-        this.router.navigateByUrl(`${AppPaths.COURSES}/(list:list)`);
+        this.router.navigate([AppPaths.courses.path, {outlets: {list: [AppPaths.courses.children.list.path]}}]);
         this.toggleRegister()
-      }, ()=> {
+      }, () => {
         subscription.unsubscribe();
         this.submitPending = false;
       });

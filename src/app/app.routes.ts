@@ -4,28 +4,32 @@ import {CoursesPage} from './components/coursesPage';
 import {CoursesList} from './components/coursesList';
 import {LoginComponent} from './components/loginPage';
 import {CoursesNew} from './components/coursesNew';
-import {CoursesEdit} from './components/coursesEdit'; 
+import {CoursesEdit} from './components/coursesEdit';
 
 import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards'
 
 export const AppPaths = {
-  LOGIN: 'login',
-  COURSES: 'courses',
-  COURSES_NEW: 'new',
-  COURSES_EDIT: 'edit'
+  login: {path:'login'},
+  courses: {
+    path: 'courses',
+    children: {
+      list: { path: 'list' },
+      edit: { path: 'edit' }
+    }
+  }
 };
 
 export const ROUTES: Routes = [
-  {path: AppPaths.LOGIN, component: LoginComponent, canActivate:[LoggedOutGuard]},
-  {path: '', resolve:{redirect:RedirectResolver}, component:NoContent},
+  { path: AppPaths.login.path, component: LoginComponent, canActivate: [LoggedOutGuard] },
+  { path: '', resolve: { redirect: RedirectResolver }, component: NoContent },
   {
-    path: AppPaths.COURSES,
+    path: AppPaths.courses.path,
     component: CoursesPage,
-    canActivate:[LoggedInGuard],
+    canActivate: [LoggedInGuard],
     children: [
-      {path: 'list', component:CoursesList, outlet: 'list'},
-      {path: 'edit/:id', component: CoursesEdit, outlet: 'details'}
+      { path: AppPaths.courses.children.list.path, component: CoursesList, outlet: 'list' },
+      { path: `${AppPaths.courses.children.edit.path}/:id`, component: CoursesEdit, outlet: 'details' }
     ]
   },
-  {path: '**', component: NoContent},
+  { path: '**', resolve: { redirect: RedirectResolver }, component: NoContent },
 ];

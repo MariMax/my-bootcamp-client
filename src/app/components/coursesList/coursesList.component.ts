@@ -19,41 +19,38 @@ import {AppPaths} from '../../app.routes';
 })
 export class CoursesList extends ComponentBase {
   collection: Course[];
-  store:any;
 
-  constructor(private coursesService: CoursesService, private loaderService: LoaderService, private router: Router, private storeService:StoreService) {
+  constructor(private coursesService: CoursesService, private loaderService: LoaderService, private router: Router, private storeService: StoreService) {
     super();
-    this.store = this.storeService.getStore();
   }
 
   ngOnInit() {
     this.loaderService.showLoader();
     const subscription = this.coursesService.downloadCollection()
-      .subscribe(collection=> {
+      .subscribe(collection => {
         this.collection = collection;
         this.loaderService.hideLoader();
         subscription.unsubscribe();
       });
 
-      this._subscription(this.store.select(state=>({coursesState:state[this.coursesService.storageFiled].filtered, global:state.globalStorage}))
-        .subscribe(state=>this.collection = state.coursesState.map(i=>state.global[i])))
+    this._subscription(this.storeService.select(state => ({ coursesState: state[this.coursesService.storageFiled].filtered, global: state.globalStorage }))
+      .subscribe(state => this.collection = state.coursesState.map(i => state.global[i])))
   }
 
-  removeCourse(course:Course){
+  removeCourse(course: Course) {
     this.loaderService.showLoader();
     const subscription = this.coursesService.removeCourse(course.id)
-      .subscribe(()=>{
+      .subscribe(() => {
         this.loaderService.hideLoader();
         subscription.unsubscribe();
-      }, ()=>{
+      }, () => {
         this.loaderService.hideLoader();
         subscription.unsubscribe();
       })
   }
 
-  editCourse(course:Course){
-    const route = `/${AppPaths.COURSES}/(list:list//details:${AppPaths.COURSES_EDIT}/${course.id})`;
-    this.router.navigateByUrl(route);
+  editCourse(course: Course) {
+    this.router.navigate([AppPaths.courses.path, { outlets: { list: [AppPaths.courses.children.list.path], details:[AppPaths.courses.children.edit.path, course.id] } }]);
   }
 
   onDestroy() {

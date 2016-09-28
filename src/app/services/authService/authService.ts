@@ -12,7 +12,6 @@ import {authReducer} from './reducers';
 export class AuthService {
   JWT_KEY: string = 'auth_token';
   USER_LOGIN_KEY = 'user_login';
-  store;
   signedOut:boolean = true;
 
   constructor(private api: ApiService,
@@ -21,8 +20,8 @@ export class AuthService {
 
     this.storeService.addReducer('auth', authReducer);
 
-    this.store = this.storeService.getStore();
-    this.store.select(state=>{
+  
+    this.storeService.select(state=>{
       console.log('state', state);
       return state.auth;
     })
@@ -98,6 +97,6 @@ export class AuthService {
     this.storeService.dispatch({type:actions.DROP_TOKEN});
     this.storeService.dropStore();
     this.signedOut = true;
-    this.router.navigate([`/${AppPaths.LOGIN}`]);
+    this.router.navigate([`/${AppPaths.login.path}`]);
   }
 }

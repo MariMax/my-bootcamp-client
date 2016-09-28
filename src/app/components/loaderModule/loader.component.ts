@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, NgZone} from '@angular/core';
 import {ComponentBase} from '../../components/componentBase';
 import {StoreService} from '../../services';
 import {LoaderService} from './loader.service';
@@ -23,16 +23,12 @@ import {LoaderService} from './loader.service';
               </div>`
 })
 export class LoaderComponent extends ComponentBase{
-  store: any;
   shown:boolean;
-  constructor(private storageService: StoreService, private loaderService: LoaderService){
+  constructor(private storageService: StoreService, private loaderService: LoaderService, private zone:NgZone){
     super();
-    this.store = this.storageService.getStore();
 
-    this._subscription(this.store.select(this.loaderService.storageField)
-      .subscribe(state=>{
-        return this.shown = state;
-      }))
+    this._subscription(this.storageService.select(this.loaderService.storageField)
+      .subscribe(state=>this.shown!==state&&this.zone.run(()=>this.shown = state)))
   }
 
   onDestroy(){}

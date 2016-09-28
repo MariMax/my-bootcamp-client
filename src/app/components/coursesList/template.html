@@ -1,4 +1,5 @@
 <div class="module">
+  <!--<fieldset>-->
   <course-card
     *ngFor="let course of collection"
     [course]="course"
@@ -6,5 +7,7 @@
     (remove)="removeCourse($event)">
 
   </course-card>
+  
   <div class="empty-list">nothing here yet</div>
+  <!--</fieldset>-->
 </div>

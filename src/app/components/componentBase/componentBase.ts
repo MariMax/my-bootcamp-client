@@ -7,8 +7,12 @@ export abstract class ComponentBase implements OnDestroy {
   constructor() {
   }
 
-  ngOnDestroy() {
+  protected unsubscribe(){
     this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe();
     this.subscriptions = null;
     this.onDestroy();
   }

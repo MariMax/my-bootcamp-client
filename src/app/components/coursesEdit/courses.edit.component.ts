@@ -1,18 +1,28 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AppPaths} from '../../app.routes';
+import {SvgUrlResolverService} from '../../services';
 
 import {ComponentBase} from '../componentBase';
 
 @Component({
-  selector:`courses-list`,
-  styleUrls:['./styles.css'],
-  templateUrl: './template.html'
+  selector: `courses-edit`,
+  styleUrls: ['./styles.css'],
+  templateUrl: './template.html',
+  host: {
+    style: `display: flex;
+           flex:1;
+          overflow: hidden;`
+  },
 })
-export class CoursesEdit extends ComponentBase{
-  id;
-  active:boolean = false;
+export class CoursesEdit extends ComponentBase {
+  id:string;
+  active: boolean = false;
 
-  constructor(private activatedRoute:ActivatedRoute, private router:Router){
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private svgUrlResolver: SvgUrlResolverService) {
     super();
 
     this._subscriptions([
@@ -20,19 +30,19 @@ export class CoursesEdit extends ComponentBase{
         .subscribe(params => {
           this.id = params['id'];
         })
-      ])
+    ])
   }
 
-  ngOnInit(){
-    setTimeout(()=>this.active = true, 10);
+  ngOnInit() {
+    setTimeout(() => this.active = true, 100);
   }
 
-  close(){
+  close() {
     this.active = false;
-  setTimeout(()=>this.router.navigateByUrl(`/courses/(list:list)`), 500);
+    setTimeout(() => this.router.navigate([AppPaths.courses.path, { outlets: { list: [AppPaths.courses.children.list.path], details: null } }]), 500);
   }
 
-  onDestroy(){
+  onDestroy() {
 
   }
 }

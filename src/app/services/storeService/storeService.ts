@@ -19,6 +19,8 @@ export class StoreService {
     this.store.replaceReducer(combineReducers(combination));
   }
 
+  select = this.store.select.bind(this.store);
+
   dropStore() {
     this.store.dispatch({type: 'ERASE_STORE'});
   }

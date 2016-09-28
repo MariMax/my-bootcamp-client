@@ -21,4 +21,8 @@
   display: flex;
 }
 
-.details-section{}
+.details-section{
+    overflow: hidden;
+  flex-flow: column;
+  display: flex;
+}

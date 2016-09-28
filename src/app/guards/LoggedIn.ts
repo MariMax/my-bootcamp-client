@@ -12,7 +12,7 @@ export class LoggedInGuard implements CanActivate {
   canActivate():boolean {
     var isLoggedIn = this.authService.isAuthorized();
     if (!isLoggedIn) {
-      this.router.navigate([AppPaths.LOGIN]);
+      this.router.navigate([AppPaths.login.path]);
     }
     return isLoggedIn;
   }
