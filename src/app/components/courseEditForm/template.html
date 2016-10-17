@@ -1,3 +1,69 @@
 <div class="module">
-  Cources Edit {{courseId}}
+  <form>
+    <div class="form-control">
+      <input type="text" id="title">
+      <label for="title">title</label>
+      <div class="bar"></div>
+    </div>
+    <div class="form-control">
+      <textarea name="description" id="description" cols="30" rows="10"></textarea>
+      <label for="description">Description</label>
+      <div class="bar"></div>
+    </div>
+    <div class="form-control">
+      <input type="text" id="date">
+      <label for="date">Date</label>
+      <div class="bar"></div>
+    </div>
+    <div class="form-control">
+      <input type="number" id="duration">
+      <label for="duration">Duration</label>
+      <div class="bar"></div>
+    </div>
+    <div class="form-control">
+      <label class="authors-label">Authors</label>
+      <div class="authors-control">
+
+        <ul id="authors-all">
+          <li *ngFor="let author of selectableAuthors" class="selectable-author">
+            <span>{{author.name}}</span>
+          </li>
+        </ul>
+
+        <button class="add">add
+          <svg width="20" height="20">
+            <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-chevron-right')}}"/>
+          </svg>
+        </button>
+
+        <ul id="authors-active">
+          <li *ngFor="let author of activeAuthors">
+            {{author.name}}
+            <button class="remove">remove author
+              <svg width="20" height="20">
+                <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="form-control">
+      <div class="form-actions">
+        <button class="save">
+          <svg width="20" height="20">
+            <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-check')}}"/>
+          </svg>
+          save
+        </button>
+        <button class="cancel">
+          <svg width="20" height="20">
+            <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
+          </svg>
+          cancel
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

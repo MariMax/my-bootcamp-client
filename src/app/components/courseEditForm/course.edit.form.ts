@@ -2,6 +2,7 @@ import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@
 import {ComponentBase} from '../componentBase';
 import {StoreService, CoursesService, Course} from '../../services';
 import {ToasterService, ToasterTypes} from '../../components/toaster';
+import {SvgUrlResolverService} from '../../services';
 import {LoaderService} from '../loaderModule/loader.service';
 
 @Component({
@@ -21,11 +22,14 @@ export class CourseEditForm extends ComponentBase {
   @Output() done = new EventEmitter();
 
   course: Course;
+  activeAuthors: any[];
+  selectableAuthors:any[];
 
   constructor(
     private storageService: StoreService,
     private coursesService: CoursesService,
     private loaderService: LoaderService,
+    private svgUrlResolver: SvgUrlResolverService,
     private toasterService: ToasterService) {
     super();
   }
@@ -52,6 +56,6 @@ export class CourseEditForm extends ComponentBase {
   }
 
   onDestroy() {
-    
+
   }
 }

@@ -1,5 +1,193 @@
-.module{
-      flex: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
+.module {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.module button.add, .module button.remove{
+  font-size: 0;
+}
+
+.module button.add:hover, .module button.add:focus, .module button.add:active,
+.module button.remove:hover, .module button.remove:focus, .module button.remove:active{
+  color: var(--orange);
+}
+
+.module button{
+  position: relative;
+  border-radius: 2px;
+  background-color: var(--white);
+  color: var(--gray);
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow .2s ease;
+  cursor: pointer;
+  border: none;
+  padding: .5rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.module button:hover, .module button:focus {
+  box-shadow: var(--shadow1);
+}
+
+.module button:active{
+  box-shadow: var(--shadow3);
+}
+
+.form-actions{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-control{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  position: relative;
+  max-width: 40rem;
+  margin: auto;
+  margin-top: 1.7rem;
+  margin-bottom: 2.5rem;
+}
+
+.form-control textarea{
+  resize: none;
+  height: 10rem;
+}
+
+.form-control input,
+.form-control textarea{
+  outline: none;
+  z-index: 1;
+  position: relative;
+  background: none;
+  width: 100%;
+  min-height: 4rem;
+  border: 0;
+  color: var(--dark-gray);
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.form-control input:focus ~ label,
+.form-control input.ng-valid ~ label,
+.form-control textarea:focus ~ label,
+.form-control textarea.ng-valid ~ label{
+  color: var(--light-gray);
+  transform: translate(-12%, -50%) scale(0.75);
+}
+
+.form-control input:focus ~ .bar:before,
+.form-control input:focus ~ .bar:after,
+.form-control textarea:focus ~ .bar:before,
+.form-control textarea:focus ~ .bar:after{
+  width: 50%;
+}
+
+.form-control label:first-letter{
+  text-transform: capitalize;
+}
+
+.form-control label{
+  font-weight: 700;
+}
+
+.form-control label {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  color: var(--gray);
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 6rem;
+  transition: all 0.2s ease;
+}
+
+.form-control .bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--gray);
+  width: 100%;
+  height: 1px;
+}
+
+.form-control .bar:before,
+.form-control .bar:after {
+  content: '';
+  position: absolute;
+  background: var(--primary);
+  width: 0;
+  height: 2px;
+  transition: .2s ease;
+}
+
+.form-control .bar:before {
+  left: 50%;
+}
+
+.form-control .bar:after {
+  right: 50%;
+}
+
+.form-control input.ng-touched.ng-invalid ~ .bar:before,
+.form-control input.ng-touched.ng-invalid ~ .bar:after,
+.form-control textarea.ng-touched.ng-invalid ~ .bar:before,
+.form-control textarea.ng-touched.ng-invalid ~ .bar:after{
+  background: var(--red);
+  width: 50%;
+  height: 2px;
+}
+
+.form-control input:focus ~ .error,
+.form-control textarea:focus ~ .error{
+  display: none;
+}
+
+.authors-control{
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.authors-control ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 20rem;
+}
+
+.authors-label{
+  color: var(--light-gray);
+  transform: translate(-12%, -50%) scale(0.75);
+}
+
+.authors-control li{
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-wrap: nowrap;
+  box-shadow: var(--shadow1);
+  margin: .4rem;
+}
+
+.authors-control li button{
+  margin: 0 .3rem 0 0;
+  padding: 0;
+}
+
+.authors-control li span{
+  flex:1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: .5rem;
+  margin: .2rem 0;
 }
