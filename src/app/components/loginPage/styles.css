@@ -397,9 +397,9 @@
 .card.alt .toggle {
   position: relative;
   background: var(--enabled-on-white);
-  width: 6rem;
-  height: 6rem;
-  border-radius: 100%;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
   box-shadow: var(--shadow1);
   color: var(--white);
   font-size: 0;
@@ -412,10 +412,8 @@
 .card.alt .toggle svg{
   width: 4rem;
   height: 4rem;
-  position: absolute;
-  top: 1rem;
-  left: 1.1rem;
-  fill: var(--white)
+  fill: var(--white);
+  margin: .8rem;
 }
 
 .card.alt .toggle:hover, .card.alt .toggle:focus, .card.alt .toggle:active {

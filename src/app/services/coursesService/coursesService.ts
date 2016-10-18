@@ -18,7 +18,7 @@ export class Course {
   public authors: Array<string>;
   public date: Date;
 
-  constructor(options: any) {
+  constructor(options: any = {}) {
     this.title = options.title;
     this.id = options.id;
     this.owner = options.owner;

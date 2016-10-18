@@ -8,6 +8,8 @@
   display: flex;
   font-size: 1.3rem;
   overflow: hidden;
+  /*width: calc(100vw - 4rem);*/
+  /*max-width: 50rem;*/
 }
 
 .info {

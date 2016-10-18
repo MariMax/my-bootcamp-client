@@ -37,13 +37,17 @@ export class CourseEditForm extends ComponentBase {
   ngOnInit() {
     this._subscription(this.storageService.select(state => ({ coursesState: state[this.coursesService.storageFiled], globalStorage: state.globalStorage }))
       .subscribe(state => {
+        if(this.courseId === 'new'){
+          return this.course = new Course();
+        }
+
         if (!state.coursesState.fetching && state.coursesState.fetchingStarted && !state.globalStorage[this.courseId]){
           this.closeForm();
           this.unsubscribe();
           return this.toasterService.showToaster(`course ${this.courseId} is not found`, ToasterTypes.error);
         }
 
-        this.course = state.globalStorage[this.courseId];
+        return this.course = state.globalStorage[this.courseId];
       }))
   }
 

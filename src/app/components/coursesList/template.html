@@ -1,4 +1,11 @@
 <div class="module">
+  <button class="add-course" (click)="addCourse()">
+    add course
+    <svg width="20" height="20">
+      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-plus')}}"/>
+    </svg>
+  </button>
+
   <!--<fieldset>-->
   <course-card
     *ngFor="let course of collection"
@@ -7,7 +14,7 @@
     (remove)="removeCourse($event)">
 
   </course-card>
-  
+
   <div class="empty-list">nothing here yet</div>
   <!--</fieldset>-->
 </div>

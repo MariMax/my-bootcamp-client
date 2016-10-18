@@ -7,6 +7,10 @@
   overflow-x: hidden;
   justify-content: flex-start;
   flex-flow: column nowrap;
+  position: relative;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .empty-list{
@@ -21,4 +25,33 @@
 
 course-card + .empty-list{
   display: none;
+}
+
+.add-course{
+  position: absolute;
+  background: var(--orange);
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow1);
+  color: var(--white);
+  font-size: 0;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: background .3s ease;
+  border: none;
+  right: 10%;
+  bottom: 6rem;
+  z-index: 3;
+}
+
+.add-course svg{
+  width: 4rem;
+  height: 4rem;
+  fill: var(--white)
+}
+
+.add-course:hover, .add-course:focus, .add-course:active {
+  background: var(--red);
 }

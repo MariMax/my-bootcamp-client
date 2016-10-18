@@ -4,6 +4,7 @@ import {CoursesService, Course} from '../../services';
 import {LoaderService} from '../loaderModule/loader.service';
 import {Router} from "@angular/router";
 import {StoreService} from '../../services';
+import {SvgUrlResolverService} from '../../services';
 import {AppPaths} from '../../app.routes';
 
 
@@ -20,7 +21,11 @@ import {AppPaths} from '../../app.routes';
 export class CoursesList extends ComponentBase {
   collection: Course[];
 
-  constructor(private coursesService: CoursesService, private loaderService: LoaderService, private router: Router, private storeService: StoreService) {
+  constructor(private coursesService: CoursesService,
+              private loaderService: LoaderService,
+              private router: Router,
+              private svgUrlResolver: SvgUrlResolverService,
+              private storeService: StoreService) {
     super();
   }
 
@@ -47,6 +52,10 @@ export class CoursesList extends ComponentBase {
         this.loaderService.hideLoader();
         subscription.unsubscribe();
       })
+  }
+
+  addCourse(){
+    this.router.navigate([AppPaths.courses.path, { outlets: { list: [AppPaths.courses.children.list.path], details:[AppPaths.courses.children.create.path, 'new'] } }]);
   }
 
   editCourse(course: Course) {

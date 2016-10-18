@@ -14,7 +14,8 @@ export const AppPaths = {
     path: 'courses',
     children: {
       list: { path: 'list' },
-      edit: { path: 'edit' }
+      edit: { path: 'edit' },
+      create: { path: 'create' }
     }
   }
 };
@@ -28,7 +29,8 @@ export const ROUTES: Routes = [
     canActivate: [LoggedInGuard],
     children: [
       { path: AppPaths.courses.children.list.path, component: CoursesList, outlet: 'list' },
-      { path: `${AppPaths.courses.children.edit.path}/:id`, component: CoursesEdit, outlet: 'details' }
+      { path: `${AppPaths.courses.children.edit.path}/:id`, component: CoursesEdit, outlet: 'details' },
+      { path: `${AppPaths.courses.children.create.path}/:id`, component: CoursesEdit, outlet: 'details' }
     ]
   },
   { path: '**', resolve: { redirect: RedirectResolver }, component: NoContent },
