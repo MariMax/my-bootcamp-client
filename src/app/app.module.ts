@@ -20,15 +20,13 @@ import {LoaderComponent} from './components/loaderModule';
 import {SearchInput} from './components/searchComponent';
 import {CourseCard} from './components/courseCard';
 
-
-import {globalStorageReducer} from './services/storeService/reducers';
-import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesService} from './services';
+import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesService, AuthorsService} from './services';
 import {LoaderService} from './components/loaderModule/loader.service'
 
 import {ToasterService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards';
 
-import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus} from './directives';
+import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus, NumbersOnlyDirective} from './directives';
 
 import {useHash} from './appConfig';
 
@@ -45,6 +43,7 @@ import {useHash} from './appConfig';
     CoursesPage,
     LatinLettersOnlyDirective,
     LettersAndNumbersDirective,
+    NumbersOnlyDirective,
     Focus,
     PageHeader,
     LoaderComponent,
@@ -70,6 +69,7 @@ import {useHash} from './appConfig';
     RedirectResolver,
     SvgUrlResolverService,
     CoursesService,
+    AuthorsService,
     LoaderService
   ]
 })

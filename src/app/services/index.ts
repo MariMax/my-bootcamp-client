@@ -4,3 +4,4 @@ export * from './storeService/storeService';
 export * from './svgUrlResolver/svgUrlResolver';
 export * from './fbConnector/fbConnector';
 export * from './coursesService/coursesService';
+export * from './authorsService/authorsService';

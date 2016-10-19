@@ -1,22 +1,22 @@
 <div class="module">
-  <form>
+  <form [formGroup]="editForm" (ngSubmit)="submitChanges(editForm.value, editForm)">
     <div class="form-control">
-      <input type="text" id="title">
+      <input type="text" id="title" [formControl]="editForm.controls.title">
       <label for="title">title</label>
       <div class="bar"></div>
     </div>
     <div class="form-control">
-      <textarea name="description" id="description" cols="30" rows="10"></textarea>
+      <textarea name="description" id="description" cols="30" rows="10" [formControl]="editForm.controls.description"></textarea>
       <label for="description">Description</label>
       <div class="bar"></div>
     </div>
     <div class="form-control">
-      <input type="text" id="date">
+      <input type="text" id="date" [formControl]="editForm.controls.date">
       <label for="date">Date</label>
       <div class="bar"></div>
     </div>
     <div class="form-control">
-      <input type="number" id="duration">
+      <input type="number" id="duration" numbers-only [formControl]="editForm.controls.duration">
       <label for="duration">Duration</label>
       <div class="bar"></div>
     </div>
@@ -25,21 +25,21 @@
       <div class="authors-control">
 
         <ul id="authors-all">
-          <li *ngFor="let author of selectableAuthors" class="selectable-author">
+          <li *ngFor="let author of selectableAuthors" class="selectable-author" (click)="selectAuthor(author)" [class.selected]="author.selected">
             <span>{{author.name}}</span>
           </li>
         </ul>
 
-        <button class="add">add
+        <button class="add" (click)="addAuthors()">add
           <svg width="20" height="20">
             <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-chevron-right')}}"/>
           </svg>
         </button>
 
-        <ul id="authors-active">
+        <ul id="authors-active" class="active-authors">
           <li *ngFor="let author of activeAuthors">
-            {{author.name}}
-            <button class="remove">remove author
+            <span>{{author.name}}</span>
+            <button class="remove" (click)="removeAuthor(author)">remove author
               <svg width="20" height="20">
                 <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
               </svg>
@@ -57,7 +57,7 @@
           </svg>
           save
         </button>
-        <button class="cancel" (click)="closeForm()">
+        <button class="cancel" (click)="closeForm()" type="button">
           <svg width="20" height="20">
             <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
           </svg>
