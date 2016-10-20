@@ -30,7 +30,7 @@
           </li>
         </ul>
 
-        <button class="add" (click)="addAuthors()">add
+        <button class="add" (click)="addAuthors()" type="button">add
           <svg width="20" height="20">
             <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-chevron-right')}}"/>
           </svg>
@@ -39,7 +39,7 @@
         <ul id="authors-active" class="active-authors">
           <li *ngFor="let author of activeAuthors">
             <span>{{author.name}}</span>
-            <button class="remove" (click)="removeAuthor(author)">remove author
+            <button class="remove" (click)="removeAuthor(author)" type="button">remove author
               <svg width="20" height="20">
                 <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-close')}}"/>
               </svg>

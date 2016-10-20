@@ -86,6 +86,12 @@ export class CoursesService {
     return itemIds.map(i => state.globalStorage[i]);
   }
 
+  getCoutses(){
+    const state = this.storeService.getState();
+    const itemIds = state[this.storageFiled].items;
+    return itemIds.map(i => state.globalStorage[i]);
+  }
+
   removeCourse(id) {
     return this.api.delete(`/course?id=${id}`)
       .do(() => {
@@ -104,11 +110,18 @@ export class CoursesService {
   }
 
   addCourse(course: any) {
+    const courses = this.getCoutses();
+    const exists = courses.find(i=>i.id === course.id);
+    if (exists){
+      return this.api.put('/course', course)
+        .do(course=>this.buildCourses([course]))
+    }
+
     return this.api.post('/course', course)
       .do(course => {
         const newCourse = this.buildCourses([course]);
         const state = this.storeService.getState();
-        const itemIds = [...state[this.storageFiled].items, newCourse.id];
+        const itemIds = [...state[this.storageFiled].items, newCourse[0].id];
         const currentFilter = state[this.storageFiled].filter;
         this.storeService.dispatch({
           type: SAVE_COURSES,

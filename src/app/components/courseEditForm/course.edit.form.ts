@@ -56,6 +56,7 @@ export class CourseEditForm extends ComponentBase {
         this.selectableAuthors = state.authorsIds.map(i=>new Author(state.globalStorage[i].id, state.globalStorage[i].name, false));
         this.activeAuthors = [];
         if (this.courseId === 'new') {
+          this.course = new Course();
           return;
         }
 
@@ -67,41 +68,61 @@ export class CourseEditForm extends ComponentBase {
         }
 
         this.course = state.globalStorage[this.courseId];
-        this.editForm['title']['setValue'](this.course.title);
-        this.editForm['description']['setValue'](this.course.description);
-        this.editForm['date']['setValue'](this.course.date);
-        this.editForm['duration']['setValue'](this.course.duration);
+        if (this.course) {
+          this.editForm.controls['title']['setValue'](this.course.title);
+          this.editForm.controls['description']['setValue'](this.course.description);
+          this.editForm.controls['date']['setValue'](this.course.date);
+          this.editForm.controls['duration']['setValue'](this.course.duration);
 
-        this.selectableAuthors.filter(i=>!this.course.authors.find(u=>u===i));
-        this.activeAuthors = this.course.authors.map(i=>state.globalStorage[i]);
+          this.selectableAuthors = this.selectableAuthors.filter(i=> {
+            const author = this.course.authors.find(u=>u === i.id);
+            return !author;
+          });
+          this.activeAuthors = this.course.authors.map(i=>state.globalStorage[i]).filter(i=>i);
+        }
         return;
       }))
   }
 
-  ngOnChanges() {
-    this.storageService.dispatch({type: 'PING_REDUX'});
-  }
+  // ngOnChanges() {
+  //   this.storageService.dispatch({type: 'PING_REDUX'});
+  // }
 
   closeForm() {
     this.done.next();
   }
 
-  selectAuthor(author){
+  selectAuthor(author) {
     author.selected = !author.selected;
   }
 
-  addAuthors(){
+  addAuthors() {
     this.activeAuthors = [...this.activeAuthors, ...this.selectableAuthors.filter(i=>i.selected)];
     this.selectableAuthors = this.selectableAuthors.filter(i=>!i.selected);
     this.activeAuthors.forEach(i=>i.selected = false);
   }
 
-  removeAuthor(author){
-    this.activeAuthors = this.activeAuthors.filter(i=>i!==author);
+  removeAuthor(author) {
+    this.activeAuthors = this.activeAuthors.filter(i=>i !== author);
     this.selectableAuthors = [...this.selectableAuthors, author];
   }
 
-  submitChanges(data: any) {
+  submitChanges(data: any, form) {
+    if (!form.valid) {
+      return this.toasterService.showToaster(`Please fill the form`, ToasterTypes.error);
+    }
+
+    this.course.title = data.title;
+    this.course.duration = data.duration;
+    this.course.date = new Date(data.date);
+    this.course.description = data.description;
+    this.course.authors = this.activeAuthors.map(i=>i.id);
+
+    const subscription = this.coursesService.addCourse(this.course)
+      .subscribe(()=> {
+        subscription.unsubscribe();
+        this.closeForm();
+      })
 
   }
 
