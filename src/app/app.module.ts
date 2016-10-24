@@ -22,6 +22,7 @@ import {CourseCard} from './components/courseCard';
 
 import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesService, AuthorsService} from './services';
 import {LoaderService} from './components/loaderModule/loader.service'
+import {DurationPipe} from './pipes/duration';
 
 import {ToasterService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards';
@@ -49,7 +50,8 @@ import {useHash} from './appConfig';
     LoaderComponent,
     SearchInput,
     CourseCard,
-    CourseEditForm
+    CourseEditForm,
+    DurationPipe
   ],
   imports: [
     BrowserModule,

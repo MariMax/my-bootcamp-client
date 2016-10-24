@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation, Input, Output, EventEmitter} from '@angular/core'
 import {Course} from "../../services/coursesService/coursesService";
-import {Router} from "@angular/router";
 
 @Component({
   selector: `course-card`,

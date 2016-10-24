@@ -2,7 +2,7 @@
   <div class="info">
     <div class="main-data">
       <h3>{{course.title}}</h3>
-      <span>{{course.duration}}</span>
+      <span>{{course.duration | duration}}</span>
       <span>{{course.date | date:'dd-MM-yyyy'}}</span>
     </div>
     <div class="description">{{course.description}}</div>

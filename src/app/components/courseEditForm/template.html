@@ -17,7 +17,7 @@
     </div>
     <div class="form-control">
       <input type="number" id="duration" numbers-only [formControl]="editForm.controls.duration">
-      <label for="duration">Duration</label>
+      <label for="duration">Duration <span *ngIf="editForm.controls.duration.value">{{editForm.controls.duration.value | duration}}</span></label>
       <div class="bar"></div>
     </div>
     <div class="form-control">
