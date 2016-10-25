@@ -27,7 +27,7 @@ import {DurationPipe} from './pipes/duration';
 import {ToasterService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards';
 
-import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus, NumbersOnlyDirective} from './directives';
+import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus, NumbersOnlyDirective, CustomDate} from './directives';
 
 import {useHash} from './appConfig';
 
@@ -51,7 +51,8 @@ import {useHash} from './appConfig';
     SearchInput,
     CourseCard,
     CourseEditForm,
-    DurationPipe
+    DurationPipe,
+    CustomDate
   ],
   imports: [
     BrowserModule,

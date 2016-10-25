@@ -1,4 +1,5 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {ComponentBase} from '../componentBase';
 import {StoreService, CoursesService, Course} from '../../services';
 import {ToasterService, ToasterTypes} from '../../components/toaster';
@@ -68,10 +69,11 @@ export class CourseEditForm extends ComponentBase {
         }
 
         this.course = state.globalStorage[this.courseId];
+        const datePipe = new DatePipe('En-us');
         if (this.course) {
           this.editForm.controls['title']['setValue'](this.course.title);
           this.editForm.controls['description']['setValue'](this.course.description);
-          this.editForm.controls['date']['setValue'](this.course.date);
+          this.editForm.controls['date']['setValue'](datePipe.transform(this.course.date, 'dd.MM.yyyy'));
           this.editForm.controls['duration']['setValue'](this.course.duration);
 
           this.selectableAuthors = this.selectableAuthors.filter(i=> {
