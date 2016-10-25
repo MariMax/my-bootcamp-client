@@ -76,10 +76,7 @@ export class CourseEditForm extends ComponentBase {
           this.editForm.controls['date']['setValue'](datePipe.transform(this.course.date, 'dd.MM.yyyy'));
           this.editForm.controls['duration']['setValue'](this.course.duration);
 
-          this.selectableAuthors = this.selectableAuthors.filter(i=> {
-            const author = this.course.authors.find(u=>u === i.id);
-            return !author;
-          });
+          this.selectableAuthors = this.selectableAuthors.filter(i=> !this.course.authors.find(u=>u === i.id));
           this.activeAuthors = this.course.authors.map(i=>state.globalStorage[i]).filter(i=>i);
         }
         return;
