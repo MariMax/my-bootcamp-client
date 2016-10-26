@@ -11,7 +11,7 @@
       <div class="bar"></div>
     </div>
     <div class="form-control">
-      <input type="text" id="date" [formControl]="editForm.controls.date" custom-date>
+      <input type="text" id="date" [formControl]="editForm.controls.date" custom-date [class.not-empty]="editForm.controls.date.value">
       <label for="date">Date(dd.MM.yyyy)</label>
       <div class="bar"></div>
     </div>

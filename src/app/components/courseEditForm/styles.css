@@ -75,6 +75,7 @@
 
 .form-control input:focus ~ label,
 .form-control input.ng-valid ~ label,
+.form-control input.not-empty ~ label,
 .form-control textarea:focus ~ label,
 .form-control textarea.ng-valid ~ label{
   color: var(--light-gray);

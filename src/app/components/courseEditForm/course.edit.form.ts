@@ -7,6 +7,7 @@ import {SvgUrlResolverService} from '../../services';
 import {LoaderService} from '../loaderModule/loader.service';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthorsService, Author} from "../../services/authorsService/authorsService";
+import {dateValidator} from '../../validators';
 
 @Component({
   selector: `course-edit-form`,
@@ -42,7 +43,7 @@ export class CourseEditForm extends ComponentBase {
     this.editForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      date: ['', Validators.required],
+      date: ['', [Validators.required, dateValidator]],
       duration: ['', Validators.required]
     });
   }
