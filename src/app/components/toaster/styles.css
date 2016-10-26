@@ -42,7 +42,7 @@
 .success {
   border-left-color: var(--green);
 }
-.warning {
+.warning, .confirmation {
   border-left-color: var(--orange);
 }
 .error, .danger {
@@ -67,4 +67,34 @@
   content: '\00d7';
   color: var(--red);
   font-size: 2rem;
+}
+
+.prompt{
+  display: flex;
+}
+
+.container.active .prompt button,
+.prompt.transition button{
+  position: relative;
+  border-radius: 2px;
+  background-color: var(--white);
+  color: var(--gray);
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow .2s ease;
+  cursor: pointer;
+  border: none;
+  padding: .5rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.prompt button:hover, .prompt button:focus {
+  box-shadow: var(--shadow1);
+}
+
+.prompt button:active{
+  box-shadow: var(--shadow3);
 }

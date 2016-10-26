@@ -84,10 +84,6 @@ export class CourseEditForm extends ComponentBase {
       }))
   }
 
-  // ngOnChanges() {
-  //   this.storageService.dispatch({type: 'PING_REDUX'});
-  // }
-
   closeForm() {
     this.done.next();
   }
@@ -114,7 +110,8 @@ export class CourseEditForm extends ComponentBase {
 
     this.course.title = data.title;
     this.course.duration = data.duration;
-    this.course.date = new Date(data.date);
+    const splited = data.date.split('.');
+    this.course.date = new Date(+splited[2], +splited[1]-1, +splited[0]);
     this.course.description = data.description;
     this.course.authors = this.activeAuthors.map(i=>i.id);
 
