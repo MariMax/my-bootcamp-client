@@ -70,6 +70,10 @@
 }
 
 .prompt{
+  display: none;
+}
+
+.prompt.confirmation{
   display: flex;
 }
 
