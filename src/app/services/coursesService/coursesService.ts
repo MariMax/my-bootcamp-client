@@ -72,7 +72,7 @@ export class CoursesService {
   filterCourses(filter = '') {
     const state = this.storeService.getState();
     const itemIds = state[this.storageFiled].items;
-    const filteredIds = itemIds.filter(i => state.globalStorage[i].toString().indexOf(filter) >= 0);
+    const filteredIds = itemIds.filter(i => state.globalStorage[i].toString().toLowerCase().indexOf(filter.toLowerCase()) >= 0);
     this.storeService.dispatch({
       type: SAVE_FILTERED_COURSES,
       payload: filteredIds
