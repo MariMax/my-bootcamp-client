@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {FBConnector} from './services';
+import {FBConnector, ApiService} from './services';
 import {fbAppID} from './appConfig';
 
 @Component({
@@ -18,11 +18,16 @@ import {fbAppID} from './appConfig';
 export class App {
   name = 'Angular 2 Webpack Starter';
 
-  constructor() {}
+  constructor(private api:ApiService) {}
 
   ngOnInit() {
     const fbCon: FBConnector = new FBConnector(fbAppID);
     fbCon.initFB();
+
+    // setInterval(()=>{
+    //   const subscription = this.api.get('/error')
+    //     .subscribe(()=>{});
+    // }, 1000)
   }
 
 }

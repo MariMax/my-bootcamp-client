@@ -39,8 +39,8 @@ export class CoursesList extends ComponentBase {
       .subscribe(data => {
         this.collection = data[0];
         this.loaderService.hideLoader();
-        subscription.unsubscribe();
-      });
+        return subscription && subscription.unsubscribe();
+      }, _=>subscription && subscription.unsubscribe());
 
     this._subscription(this.storeService.select(state => ({
       coursesState: state[this.coursesService.storageFiled].filtered,
@@ -54,10 +54,10 @@ export class CoursesList extends ComponentBase {
     const subscription = this.coursesService.removeCourse(course.id)
       .subscribe(() => {
         this.loaderService.hideLoader();
-        subscription.unsubscribe();
+        return subscription && subscription.unsubscribe();
       }, () => {
         this.loaderService.hideLoader();
-        subscription.unsubscribe();
+        return subscription && subscription.unsubscribe();
       })
   }
 
