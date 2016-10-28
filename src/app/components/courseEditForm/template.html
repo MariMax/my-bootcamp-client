@@ -26,7 +26,7 @@
 
         <ul id="authors-all">
           <li *ngFor="let author of selectableAuthors" class="selectable-author" (click)="selectAuthor(author)" [class.selected]="author.selected">
-            <span>{{author.name}}</span>
+            <button type="button">{{author.name}}</button>
           </li>
         </ul>
 

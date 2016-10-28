@@ -4,16 +4,16 @@
   overflow-y: auto;
 }
 
-.module button.add, .module button.remove{
+.module button.add, .module button.remove {
   font-size: 0;
 }
 
 .module button.add:hover, .module button.add:focus, .module button.add:active,
-.module button.remove:hover, .module button.remove:focus, .module button.remove:active{
+.module button.remove:hover, .module button.remove:focus, .module button.remove:active {
   color: var(--orange);
 }
 
-.module button{
+.module button {
   position: relative;
   border-radius: 2px;
   background-color: var(--white);
@@ -34,16 +34,16 @@
   box-shadow: var(--shadow1);
 }
 
-.module button:active{
+.module button:active {
   box-shadow: var(--shadow3);
 }
 
-.form-actions{
+.form-actions {
   display: flex;
   justify-content: flex-end;
 }
 
-.form-control{
+.form-control {
   display: flex;
   flex-flow: column;
   width: 100%;
@@ -54,13 +54,13 @@
   margin-bottom: 2.5rem;
 }
 
-.form-control textarea{
+.form-control textarea {
   resize: none;
   height: 10rem;
 }
 
 .form-control input,
-.form-control textarea{
+.form-control textarea {
   outline: none;
   z-index: 1;
   position: relative;
@@ -73,31 +73,31 @@
   font-weight: 400;
 }
 
-.form-control input:focus ~ label,
-.form-control input.ng-valid ~ label,
-.form-control input.not-empty ~ label,
-.form-control textarea:focus ~ label,
-.form-control textarea.ng-valid ~ label{
+.form-control > input:focus ~ label,
+.form-control > input.ng-valid ~ label,
+.form-control > input.not-empty ~ label,
+.form-control > textarea:focus ~ label,
+.form-control > textarea.ng-valid ~ label {
   color: var(--light-gray);
   transform: translate(-12%, -50%) scale(0.75);
 }
 
-.form-control input:focus ~ .bar:before,
-.form-control input:focus ~ .bar:after,
-.form-control textarea:focus ~ .bar:before,
-.form-control textarea:focus ~ .bar:after{
+.form-control > input:focus ~ .bar:before,
+.form-control > input:focus ~ .bar:after,
+.form-control > textarea:focus ~ .bar:before,
+.form-control > textarea:focus ~ .bar:after {
   width: 50%;
 }
 
-.form-control label:first-letter{
+.form-control > label:first-letter {
   text-transform: capitalize;
 }
 
-.form-control label{
+.form-control > label {
   font-weight: 700;
 }
 
-.form-control label {
+.form-control > label {
   position: absolute;
   top: -1rem;
   left: 0;
@@ -135,27 +135,27 @@
   right: 50%;
 }
 
-.form-control input.ng-touched.ng-invalid ~ .bar:before,
-.form-control input.ng-touched.ng-invalid ~ .bar:after,
-.form-control textarea.ng-touched.ng-invalid ~ .bar:before,
-.form-control textarea.ng-touched.ng-invalid ~ .bar:after{
+.form-control > input.ng-touched.ng-invalid ~ .bar:before,
+.form-control > input.ng-touched.ng-invalid ~ .bar:after,
+.form-control > textarea.ng-touched.ng-invalid ~ .bar:before,
+.form-control > textarea.ng-touched.ng-invalid ~ .bar:after {
   background: var(--red);
   width: 50%;
   height: 2px;
 }
 
-.form-control input:focus ~ .error,
-.form-control textarea:focus ~ .error{
+.form-control > input:focus ~ .error,
+.form-control > textarea:focus ~ .error {
   display: none;
 }
 
-.authors-control{
+.authors-control {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
 }
 
-.authors-control ul{
+.authors-control ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -165,12 +165,12 @@
   max-height: 20rem;
 }
 
-.authors-label{
+.authors-label {
   color: var(--light-gray);
   transform: translate(-12%, -50%) scale(0.75);
 }
 
-.authors-control li{
+.authors-control li {
   display: flex;
   overflow: hidden;
   align-items: center;
@@ -179,13 +179,13 @@
   margin: .4rem;
 }
 
-.authors-control li button{
+.authors-control li button {
   margin: 0 .3rem 0 auto;
   padding: 0;
 }
 
-.authors-control li span{
-  flex:1;
+.authors-control li span {
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -198,6 +198,23 @@
   color: var(--white);
 }
 
-.active-authors span{
+.active-authors span {
   cursor: default;
+}
+
+.selected button{
+  color: var(--white);
+}
+
+.selectable-author button {
+  width: 100%;
+  height: 100%;
+  text-transform: none;
+  border: none;
+  background: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: .20rem !important;
+  cursor: pointer;
 }
