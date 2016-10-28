@@ -1,6 +1,6 @@
-import {SAVE_FILTERED_COURSES, SAVE_ACTIVE_COURSES_FILTER, SAVE_COURSES, COURSES_FETCHED, COURSES_FETCHING} from '../actions';
+import {SAVE_FILTERED_COURSES, SAVE_ACTIVE_COURSES_FILTER, SAVE_COURSES, COURSES_FETCHED, COURSES_FETCHING, SELECT_COURSE} from '../actions';
 
-export const coursesListReducer = (state = { filtered: [], filter: '', items: [], fetching: false, fetchingStarted:false }, action) => {
+export const coursesListReducer = (state = { filtered: [], filter: '', items: [], fetching: false, fetchingStarted:false, selected: '' }, action) => {
   switch (action.type) {
     case SAVE_FILTERED_COURSES: {
       return Object.assign({}, state, { filtered: action.payload });
@@ -20,6 +20,10 @@ export const coursesListReducer = (state = { filtered: [], filter: '', items: []
 
     case COURSES_FETCHED: {
       return Object.assign({}, state, { fetching: false });
+    }
+
+    case SELECT_COURSE: {
+      return Object.assign({}, state, { selected: action.payload });
     }
 
     default: return state;

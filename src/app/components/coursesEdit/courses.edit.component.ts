@@ -4,6 +4,7 @@ import {AppPaths} from '../../app.routes';
 import {SvgUrlResolverService} from '../../services';
 
 import {ComponentBase} from '../componentBase';
+import {CoursesService} from "../../services/coursesService/coursesService";
 
 @Component({
   selector: `courses-edit`,
@@ -22,6 +23,7 @@ export class CoursesEdit extends ComponentBase {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private courseService: CoursesService,
     private svgUrlResolver: SvgUrlResolverService) {
     super();
 
@@ -29,6 +31,7 @@ export class CoursesEdit extends ComponentBase {
       this.activatedRoute.params
         .subscribe(params => {
           this.id = params['id'];
+          this.courseService.selectCourse(this.id);
         })
     ])
   }

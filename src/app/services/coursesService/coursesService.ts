@@ -3,7 +3,7 @@ import {ApiService} from "../apiService/apiService";
 import {StoreService} from '../storeService/storeService';
 import {SAVE_GLOBAL_ITEM} from '../storeService/actions';
 import {coursesListReducer} from './reducers';
-import {SAVE_FILTERED_COURSES, COURSES_FETCHING, COURSES_FETCHED, SAVE_COURSES} from "./actions";
+import {SAVE_FILTERED_COURSES, COURSES_FETCHING, COURSES_FETCHED, SAVE_COURSES, SELECT_COURSE} from "./actions";
 
 export class Owner {
   constructor(public id: string, public login: string) { }
@@ -129,5 +129,12 @@ export class CoursesService {
         });
         this.filterCourses(currentFilter);
       });
+  }
+
+  selectCourse(id){
+    this.storeService.dispatch({
+      type: SELECT_COURSE,
+      payload: id
+    });
   }
 }

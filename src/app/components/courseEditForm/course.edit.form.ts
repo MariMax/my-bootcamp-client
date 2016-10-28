@@ -21,7 +21,6 @@ import {dateValidator} from '../../validators';
   },
 })
 export class CourseEditForm extends ComponentBase {
-  @Input() courseId: string;
   @Output() done = new EventEmitter();
 
   editForm: FormGroup;
@@ -52,24 +51,25 @@ export class CourseEditForm extends ComponentBase {
     this._subscription(this.storageService.select(state => ({
       authorsIds: state[this.authorsService.storageFiled],
       coursesState: state[this.coursesService.storageFiled],
-      globalStorage: state.globalStorage
+      globalStorage: state.globalStorage,
+      courseId: state[this.coursesService.storageFiled].selected
     }))
       .subscribe(state => {
         this.selectableAuthors = state.authorsIds.map(i=>new Author(state.globalStorage[i].id, state.globalStorage[i].name, false));
         this.activeAuthors = [];
-        if (this.courseId === 'new') {
+        if (state.courseId === 'new') {
           this.course = new Course();
           return;
         }
 
-        if (!state.coursesState.fetching && state.coursesState.fetchingStarted && !state.globalStorage[this.courseId]) {
+        if (!state.coursesState.fetching && state.coursesState.fetchingStarted && !state.globalStorage[state.courseId]) {
           this.closeForm();
           this.unsubscribe();
-          this.toasterService.showToaster(`course ${this.courseId} is not found`, ToasterTypes.error);
+          this.toasterService.showToaster(`course ${state.courseId} is not found`, ToasterTypes.error);
           return;
         }
 
-        this.course = state.globalStorage[this.courseId];
+        this.course = state.globalStorage[state.courseId];
         const datePipe = new DatePipe('En-us');
         if (this.course) {
           this.editForm.controls['title']['setValue'](this.course.title);
