@@ -19,6 +19,7 @@ import {PageHeader} from './components/header';
 import {LoaderComponent} from './components/loaderModule';
 import {SearchInput} from './components/searchComponent';
 import {CourseCard} from './components/courseCard';
+import {Breadcrumbs, BreadcrumbsService} from './components/breadcrumbs';
 
 import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesService, AuthorsService} from './services';
 import {LoaderService} from './components/loaderModule/loader.service'
@@ -52,7 +53,8 @@ import {useHash} from './appConfig';
     CourseCard,
     CourseEditForm,
     DurationPipe,
-    CustomDate
+    CustomDate,
+    Breadcrumbs
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import {useHash} from './appConfig';
     SvgUrlResolverService,
     CoursesService,
     AuthorsService,
-    LoaderService
+    LoaderService,
+    BreadcrumbsService
   ]
 })
 export class AppModule {

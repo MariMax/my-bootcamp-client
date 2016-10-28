@@ -17,6 +17,7 @@
   display: flex;
   white-space: nowrap;
   overflow: hidden;
+  flex:1;
 }
 
 .user-name{
@@ -25,6 +26,7 @@
   transition: .2s ease;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-left: auto;
 }
 
 .user-name.hide{
@@ -44,6 +46,7 @@
   z-index: 2;
   box-sizing: border-box;
   padding: 0 0 .3rem 0;
+  min-width: 2rem;
 }
 
 .logout:hover, .logout:focus, .logout:active{

@@ -1,0 +1,36 @@
+.module{
+  padding-bottom: .2rem;
+  margin-right: 1rem;
+  overflow: hidden;
+  display: none;
+}
+
+.item:first-child svg{
+  display: none;
+}
+
+.item{
+  display: flex;
+  align-items: center;
+}
+
+.item button{
+  cursor: pointer;
+  text-align: center;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  border: none;
+  white-space: nowrap;
+  background-color: transparent;
+  flex: 1;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  padding: 0;
+}
+
+@media screen and (min-width: 760px){
+  .module{
+    display: flex;
+  }
+}
