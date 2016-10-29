@@ -7,6 +7,7 @@ import {StoreService} from '../../services';
 import {SvgUrlResolverService} from '../../services';
 import {AppPaths} from '../../app.routes';
 import {Observable} from 'rxjs/Rx';
+import {BreadcrumbsService} from '../breadcrumbs';
 
 
 @Component({
@@ -27,12 +28,24 @@ export class CoursesList extends ComponentBase {
               private authorsService: AuthorsService,
               private router: Router,
               private svgUrlResolver: SvgUrlResolverService,
-              private storeService: StoreService) {
+              private storeService: StoreService,
+              private breadcrumbsService: BreadcrumbsService) {
     super();
   }
 
   ngOnInit() {
     this.loaderService.showLoader();
+
+    this.breadcrumbsService.addItem(
+      'course list',
+      'courseList',
+      ()=>this.router.navigate([AppPaths.courses.path, {
+        outlets: {
+          list: [AppPaths.courses.children.list.path],
+          details: null
+        }
+      }])
+    );
 
     const subscription = Observable.forkJoin(this.coursesService.downloadCollection(),
       this.authorsService.downloadCollection())

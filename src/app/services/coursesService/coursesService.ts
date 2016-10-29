@@ -137,4 +137,10 @@ export class CoursesService {
       payload: id
     });
   }
+
+  getTitle(id){
+    if (id === 'new') return id;
+    const state = this.storeService.getState();
+    return state.globalStorage[id]&&state.globalStorage[id].title||'';
+  }
 }

@@ -33,11 +33,11 @@ export class ToasterService{
       type:actions.HIDE_TOAST
     });
 
-    this.observer.error("");
+    this.observer.error('');
   }
 
   confirm(){
-    this.observer.next("");
+    this.observer.next();
     this.storageService.dispatch({
       type:actions.HIDE_TOAST
     });

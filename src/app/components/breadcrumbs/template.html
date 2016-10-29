@@ -1,20 +1,11 @@
 <div class="module">
-  <div class="item">
+  <div class="item" *ngFor="let item of items">
     <svg width="20" height="20">
       <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-chevron-right')}}"/>
     </svg>
 
-    <button >
-      course list
-    </button>
-  </div>
-  <div class="item">
-    <svg width="20" height="20">
-      <use attr.xlink:href="{{svgUrlResolver.getUrl('icon-chevron-right')}}"/>
-    </svg>
-
-    <button >
-      course name
+    <button (click)="transit(item)">
+      {{item.itemText}}
     </button>
   </div>
 </div>
