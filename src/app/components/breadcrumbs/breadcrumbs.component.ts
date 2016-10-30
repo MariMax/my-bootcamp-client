@@ -1,18 +1,23 @@
-import {Component, ViewEncapsulation, Injectable} from '@angular/core';
-import {SvgUrlResolverService} from "../../services/svgUrlResolver/svgUrlResolver";
-import {StoreService} from "../../services/storeService/storeService";
-import {ComponentBase} from '../componentBase';
+import { Component, ViewEncapsulation, Injectable } from '@angular/core';
+import { SvgUrlResolverService } from "../../services/svgUrlResolver/svgUrlResolver";
+import { StoreService } from "../../services/storeService/storeService";
+import { ComponentBase } from '../componentBase';
 
 const ADD_BREADCRUMB = 'ADD_BREADCRUMB';
 const REMOVE_BREADCRUMB = 'REMOVE_BREADCRUMB';
 
-const removeItem = (items, itemRouteId) => items.filter(i=>i.itemRouteId !== itemRouteId);
-const addItem = (items, newItem) => [...removeItem(items, newItem.itemRouteId), newItem];
+const removeItem = (items, itemRouteId) => items.filter(i => i.itemRouteId !== itemRouteId);
+const addItem = (items, newItem) => {
+  if (!newItem.force && items.find(i=>i.itemRouteId === newItem.itemRouteId)){
+    return items;
+  }
+  return [...removeItem(items, newItem.itemRouteId), newItem];
+}
 
-const breadcrumbsReducer = (state=[], action) =>{
-  switch (action.type){
+const breadcrumbsReducer = (state = [], action) => {
+  switch (action.type) {
     case ADD_BREADCRUMB:
-      return addItem(state, action.payload);
+      return addItem(state, action.payload).sort((a, b) => a.itemRouteId - b.itemRouteId)
 
     case REMOVE_BREADCRUMB:
       return removeItem(state, action.payload);
@@ -24,16 +29,16 @@ const breadcrumbsReducer = (state=[], action) =>{
 
 @Injectable()
 export class BreadcrumbsService {
-  storageField:string = 'breadcrumbs';
+  storageField: string = 'breadcrumbs';
 
-  constructor(private storageService: StoreService){}
+  constructor(private storageService: StoreService) { }
 
-  addItem(itemText, itemRouteId, navigateFunc) {
-    this.storageService.dispatch({type:ADD_BREADCRUMB, payload:{itemText, itemRouteId, navigateFunc}});
+  addItem(itemText, itemRouteId, navigateFunc, force = false) {
+    this.storageService.dispatch({ type: ADD_BREADCRUMB, payload: { itemText, itemRouteId, navigateFunc, force } });
   }
 
   removeItem(itemRouteId) {
-    this.storageService.dispatch({type:REMOVE_BREADCRUMB, payload: itemRouteId})
+    this.storageService.dispatch({ type: REMOVE_BREADCRUMB, payload: itemRouteId })
   }
 }
 
@@ -46,22 +51,22 @@ export class BreadcrumbsService {
     style: 'overflow: hidden;'
   }
 })
-export class Breadcrumbs extends ComponentBase{
-  items:any[] = [];
+export class Breadcrumbs extends ComponentBase {
+  items: any[] = [];
 
   constructor(private svgUrlResolver: SvgUrlResolverService,
-              private storageService: StoreService,
-              private breadcrumbService: BreadcrumbsService) {
+    private storageService: StoreService,
+    private breadcrumbService: BreadcrumbsService) {
     super();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.storageService.addReducer(this.breadcrumbService.storageField, breadcrumbsReducer);
     this._subscription(this.storageService.select(this.breadcrumbService.storageField)
-      .subscribe(items=>this.items = items))
+      .subscribe(items => this.items = items));
   }
 
-  onDestroy(){}
+  onDestroy() { }
 
   transit(item) {
     item.navigateFunc();

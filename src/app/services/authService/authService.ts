@@ -22,7 +22,7 @@ export class AuthService {
 
   
     this.storeService.select(state=>{
-      console.log('state', state);
+      // console.log('state', state);
       return state.auth;
     })
       .subscribe(auth=> {

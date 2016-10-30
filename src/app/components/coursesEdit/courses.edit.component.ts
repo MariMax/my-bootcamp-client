@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AppPaths} from '../../app.routes';
-import {SvgUrlResolverService} from '../../services';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppPaths } from '../../app.routes';
+import { SvgUrlResolverService, StoreService } from '../../services';
 
-import {ComponentBase} from '../componentBase';
-import {CoursesService} from "../../services/coursesService/coursesService";
-import {BreadcrumbsService} from "../breadcrumbs/breadcrumbs.component";
+import { ComponentBase } from '../componentBase';
+import { CoursesService } from "../../services/coursesService/coursesService";
+import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: `courses-edit`,
@@ -22,10 +22,11 @@ export class CoursesEdit extends ComponentBase {
   active: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private courseService: CoursesService,
-              private breadcrumbsService: BreadcrumbsService,
-              private svgUrlResolver: SvgUrlResolverService) {
+    private router: Router,
+    private courseService: CoursesService,
+    private breadcrumbsService: BreadcrumbsService,
+    private storageService: StoreService, 
+    private svgUrlResolver: SvgUrlResolverService) {
     super();
 
     this._subscriptions([
@@ -33,14 +34,24 @@ export class CoursesEdit extends ComponentBase {
         .subscribe(params => {
           this.id = params['id'];
           this.courseService.selectCourse(this.id);
-          const courseName = this.courseService.getTitle(this.id);
 
           this.breadcrumbsService.addItem(
-            courseName,
-            'courseItem',
-            this._transitTotheCourse.bind(this, this.id)
+            'course list',
+            1,
+            this.close.bind(this),
+            true
           );
-        })
+        }),
+        this.storageService.select(state=>state.globalStorage)
+        .subscribe(state=>{
+          const course = state[this.id];
+          return course && this.breadcrumbsService.addItem(
+            course.title,
+            2,
+            this._transitTotheCourse.bind(this, this.id),
+            true
+          );
+        })  
     ])
   }
 
@@ -68,6 +79,6 @@ export class CoursesEdit extends ComponentBase {
   }
 
   onDestroy() {
-    this.breadcrumbsService.removeItem('courseItem');
+    this.breadcrumbsService.removeItem(2);
   }
 }

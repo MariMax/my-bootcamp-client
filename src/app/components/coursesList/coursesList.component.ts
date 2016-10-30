@@ -38,7 +38,7 @@ export class CoursesList extends ComponentBase {
 
     this.breadcrumbsService.addItem(
       'course list',
-      'courseList',
+      1,
       ()=>this.router.navigate([AppPaths.courses.path, {
         outlets: {
           list: [AppPaths.courses.children.list.path],
