@@ -44,7 +44,7 @@ export class CoursesEdit extends ComponentBase {
         }),
         this.storageService.select(state=>state.globalStorage)
         .subscribe(state=>{
-          const course = state[this.id];
+          const course = this.id === 'new'?{title:'new'}:state[this.id];
           return course && this.breadcrumbsService.addItem(
             course.title,
             2,
