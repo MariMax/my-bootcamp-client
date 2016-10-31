@@ -67,8 +67,8 @@ export class TimerService {
 
 @Component({
   selector: 'toaster',
-  styleUrls:['./styles.css'],
-  templateUrl: './template.html',
+  styles:[require('./styles.css')],
+  template: require('./template.html'),
   encapsulation: ViewEncapsulation.Emulated,
 
   host: {
