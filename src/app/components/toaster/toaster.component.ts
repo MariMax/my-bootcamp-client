@@ -16,7 +16,7 @@ export class ToasterService{
     this.storageService.addReducer('toaster', toasterReducer);
   }
 
-  showToaster(message, type){
+  showToaster(message='Unknown error, please try again', type){
     this.storageService.dispatch({
       type: actions.SHOW_TOAST,
       payload:{
@@ -52,6 +52,18 @@ export enum ToasterTypes{
   confirmation
 }
 
+@Injectable()
+export class TimerService {
+
+  setTimeout(callback, time: number) {
+    return setTimeout(callback, time);
+  }
+
+  clearTimeout(timer) {
+    clearTimeout(timer);
+  }
+}
+
 
 @Component({
   selector: 'toaster',
@@ -73,6 +85,7 @@ export class ToasterComponent extends ComponentBase{
   constructor(
     private storeService:StoreService,
     private svgUrlResolver: SvgUrlResolverService,
+    private timerService: TimerService,
     private service: ToasterService){
     super();
 
@@ -82,11 +95,11 @@ export class ToasterComponent extends ComponentBase{
         this.type = ToasterTypes[state.type];
         this.active = state.active;
         if (this.active){
-          this.timer&&clearTimeout(this.timer);
-          this.timer = setTimeout(()=>this.close(), 7000);
+          this.timer&&this.timerService.clearTimeout(this.timer);
+          this.timer = this.timerService.setTimeout(()=>this.close(), 7000);
         } else {
           this.transition = true;
-          setTimeout(_=>this.transition = false, 500);
+          this.timerService.setTimeout(_=>this.transition = false, 500);
         }
       }))
   }

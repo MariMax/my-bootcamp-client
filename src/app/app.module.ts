@@ -25,7 +25,7 @@ import {ApiService, AuthService, StoreService, SvgUrlResolverService, CoursesSer
 import {LoaderService} from './components/loaderModule/loader.service'
 import {DurationPipe} from './pipes/duration';
 
-import {ToasterService} from './components/toaster';
+import {ToasterService, TimerService} from './components/toaster';
 import {LoggedOutGuard, LoggedInGuard, RedirectResolver} from './guards';
 
 import {LatinLettersOnlyDirective, LettersAndNumbersDirective, Focus, NumbersOnlyDirective, CustomDate} from './directives';
@@ -76,7 +76,8 @@ import {useHash} from './appConfig';
     CoursesService,
     AuthorsService,
     LoaderService,
-    BreadcrumbsService
+    BreadcrumbsService,
+    TimerService
   ]
 })
 export class AppModule {
