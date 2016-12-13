@@ -217,6 +217,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: 'src/assets',
       to: 'assets'
+    }, {
+      from: 'firebase.json',
+      to: 'firebase.json'
     }]),
 
     /*
