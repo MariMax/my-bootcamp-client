@@ -28,7 +28,7 @@ export class FBConnector {
     js.async = true;
     js.src = "//connect.facebook.net/en_US/sdk.js";
 
-    ref.parentNode.insertBefore(js, ref);
+    //ref.parentNode.insertBefore(js, ref);
   }
 
 }
